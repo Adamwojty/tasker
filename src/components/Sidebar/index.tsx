@@ -24,7 +24,7 @@ const Wrapper = styled.section<{ active: boolean }>`
     width: 320px;
     position: fixed;
     bottom: 0;
-    top: 47px;
+    top: 50px;
     border-right: 2px solid ${Colors.NAV_HOVER};
     z-index: 2;
     transform: ${({ active }) => (active ? 'translateX(-300px)' : null)};

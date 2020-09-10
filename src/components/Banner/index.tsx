@@ -2,11 +2,12 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Colors, FontWeight, FontSize } from '../../assets/const';
+import { Routes } from '../../config/Routing/Routes';
 const Banner: React.FC = () => {
     return (
         <Wrapper>
             <Logo to="/">tasker</Logo>
-            <NewProject>New Project</NewProject>
+            <NewProject to={Routes.NEW_PROJECT}>New Project</NewProject>
             <OptionsWrapper>
                 <Settings />
                 <Avatar />
@@ -28,7 +29,7 @@ const Logo = styled(Link)`
     font-weight: ${FontWeight.BOLD};
     font-size: ${FontSize.LOGO_MOBILE};
 `;
-const NewProject = styled.button`
+const NewProject = styled(Link)`
     color: ${Colors.MAIN};
     background-color: ${Colors.SECONDARY};
     padding: 5px 10px;
