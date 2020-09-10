@@ -20,3 +20,7 @@ export enum FontWeight {
     REGULAR = '400',
     BOLD = '700',
 }
+export enum Medias {
+    MOBILE_L = '(min-width:650px)',
+    TABLET = '(min-width:900px)',
+}

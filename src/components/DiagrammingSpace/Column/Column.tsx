@@ -14,7 +14,7 @@ const Column: React.FC<ICol> = ({ text, isDragging }) => {
 const Col = styled.div`
     border-radius: 5px;
     width: 250px;
-    min-height: 90%;
+    min-height: 600px;
     background-color: ${Colors.QUINARY};
 `;
 const Title = styled.div<{ isDragging: boolean }>`

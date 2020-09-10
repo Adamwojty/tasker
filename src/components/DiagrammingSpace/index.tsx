@@ -60,8 +60,8 @@ const DiagramingSpace: React.FC = () => {
 };
 
 const Wrapper = styled.div`
-    transform: translateX(320px);
-    min-height: 800px;
+    transform: translateX(20px);
+    min-height: 600px;
 `;
 const DraggableSpace = styled.div`
     display: flex;
