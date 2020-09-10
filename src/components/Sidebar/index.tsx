@@ -21,14 +21,17 @@ const Sidebar: React.FC = () => {
 };
 const Wrapper = styled.section<{ active: boolean }>`
     background-color: ${Colors.QUATERNARY};
-    width: 100vw;
-    height: 100%;
-    position: relative;
+    width: 320px;
+    position: fixed;
+    bottom: 0;
+    top: 47px;
     border-right: 2px solid ${Colors.NAV_HOVER};
+    z-index: 2;
     transform: ${({ active }) => (active ? 'translateX(-300px)' : null)};
     transition: 0.5s ease-in-out;
 `;
 const Status = styled.button`
+    outline: none;
     position: absolute;
     top: 40px;
     right: -15px;

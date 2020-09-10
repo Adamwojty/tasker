@@ -3,6 +3,10 @@ export enum Colors {
     SECONDARY = 'rgb(0,82,204)',
     TERITIARY = 'rgb(23,43,77)',
     QUATERNARY = 'rgb(244,245,247)',
+    QUINARY = 'rgb(235,236,240)',
+    SENARY = '',
+    SEPTENARY = '',
+
     NAV_HOVER = 'rgb(235,236,240)',
 }
 export enum FontSize {

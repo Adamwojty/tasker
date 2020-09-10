@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FontSize, FontWeight } from '../../assets/const';
+import { FontSize, FontWeight, Colors } from '../../assets/const';
 import { Icon } from '../common/Icon';
 const PROJECT_INFO = {
     title: 'tasker',
@@ -18,9 +18,11 @@ const Header: React.FC = () => {
     );
 };
 const Wrapper = styled.header`
+    margin-left: 10px;
     padding: 60px 0 50px;
     align-items: center;
     display: flex;
+    color: ${Colors.TERITIARY};
 `;
 const Title = styled.h2`
     font-weight: ${FontWeight.REGULAR};

@@ -5,7 +5,7 @@ import { Colors, FontWeight, FontSize } from '../../assets/const';
 const Banner: React.FC = () => {
     return (
         <Wrapper>
-            <Logo to="/">tracker</Logo>
+            <Logo to="/">tasker</Logo>
             <NewProject>New Project</NewProject>
             <OptionsWrapper>
                 <Settings />
