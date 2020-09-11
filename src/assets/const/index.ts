@@ -11,8 +11,10 @@ export enum Colors {
 }
 export enum FontSize {
     LOGO_MOBILE = '20px',
+    BIG_HEADER_MOBILE = '30px',
     HEADER_MOBILE = '18px',
     SUB_HEADER_MOBILE = '12px',
+    TEXT_MOBILE = '14px',
 
     NAV_ITEM_MOBILE = '14px',
 }

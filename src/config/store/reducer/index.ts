@@ -2,7 +2,8 @@ import { ActionTypes } from '../models';
 import { IAction } from '../models';
 
 export const initialState = {
-    user: null,
+    user: '12312241289',
+    projectsId: [],
 };
 export const reducer = (state = initialState, action: IAction) => {
     switch (action.type) {

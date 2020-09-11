@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import 'firebase/firestore';
+import 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -12,4 +13,10 @@ const firebaseConfig = {
     measurementId: 'G-3V75GH8TS8',
 };
 const fb = firebase.initializeApp(firebaseConfig);
+
+//firestore
 export const db = fb.firestore();
+
+//auth
+export const auth = firebase.auth();
+export const provider = new firebase.auth.GoogleAuthProvider();

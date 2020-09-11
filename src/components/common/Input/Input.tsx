@@ -9,13 +9,14 @@ interface IInput {
     placeholder: string;
     error: string;
     value: string;
+    type?: string;
 }
 
-const Input: React.FC<IInput> = ({ field, name, error, placeholder, value }) => {
+const Input: React.FC<IInput> = ({ field, name, error, placeholder, value, type }) => {
     return (
         <Wrapper>
             {error ? <Error>{error}</Error> : null}
-            <Field placeholder={placeholder} error={error} name={name} value={value} {...field} />
+            <Field placeholder={placeholder} error={error} name={name} value={value} type={type} {...field} />
         </Wrapper>
     );
 };

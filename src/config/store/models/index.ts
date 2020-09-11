@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 export enum ActionTypes {
     SET_USER = 'SET_USER',
+    ADD_PROJECT_ID = 'ADD_PROJECT_ID',
 }
 export interface IAction {
     type: string;
@@ -9,7 +10,8 @@ export interface IAction {
 }
 
 export interface IInitialContext {
-    user: any;
+    user: string;
+    projectsId: string[];
     dispatch: ({ type, payload }: { type: string; payload: any }) => void;
 }
 export interface IStateProvider {

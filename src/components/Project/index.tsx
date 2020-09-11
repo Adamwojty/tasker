@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Formik } from 'formik';
 import ProjectInputs from './ProjectIntputs';
 import { validationSchema } from './actions/validationSchema';
 import { projectSubmit } from './actions/projectSubmit';
-
+import { store } from '../../config/store';
 interface IInitialValues {
     projectName: string;
     desc: string;
@@ -12,6 +12,7 @@ interface IInitialValues {
 
 const Project: React.FC = () => {
     const initialValues: IInitialValues = { projectName: '', desc: '' };
+    const { user, dispatch } = useContext(store);
     return (
         <Wrapper>
             <Formik
@@ -19,7 +20,7 @@ const Project: React.FC = () => {
                 validateOnChange={false}
                 validateOnBlur={false}
                 validationSchema={validationSchema}
-                onSubmit={projectSubmit}
+                onSubmit={(values, action) => projectSubmit({ values, action, user, dispatch })}
             >
                 {(props: { errors: string }) => <ProjectInputs {...props} />}
             </Formik>

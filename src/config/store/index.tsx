@@ -2,9 +2,9 @@ import React, { createContext, useReducer } from 'react';
 import { IInitialContext, IStateProvider } from './models';
 import { reducer, initialState } from './reducer';
 
-const store = createContext({} as IInitialContext);
+export const store = createContext({} as IInitialContext);
 
-export const StateProvider: React.FC<IStateProvider> = (children) => {
+export const StateProvider: React.FC<IStateProvider> = ({ children }) => {
     const { Provider } = store;
     const [state, dispatch] = useReducer(reducer, initialState);
 
