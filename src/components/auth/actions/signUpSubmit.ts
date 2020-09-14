@@ -1,4 +1,4 @@
-import { auth } from '../../../config/firebase/firebaseInit';
+import { auth, db } from '../../../config/firebase/firebaseInit';
 import { Routes } from '../../../config/Routing/Routes';
 
 interface IValues {
@@ -14,7 +14,12 @@ export const signUpSubmit = async (
 ) => {
     const { email, password } = values;
     try {
-        await auth.createUserWithEmailAndPassword(email, password);
+        const response = await auth.createUserWithEmailAndPassword(email, password);
+        const uid = response.user?.uid;
+        await db.collection('users').doc(uid).set({
+            uid,
+            projectsId: [],
+        });
         window.location.replace(Routes.SIGN_IN);
     } catch (err) {
         action.setErrors({ email: 'Server error' });

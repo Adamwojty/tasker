@@ -6,9 +6,15 @@ export const addProjectId = (id: string) => {
         payload: id,
     };
 };
-export const setUser = (id?: string) => {
+export const setUser = (obj?: { uid?: string; projectsId?: string[] }) => {
     return {
         type: ActionTypes.SET_USER,
-        payload: id,
+        payload: obj,
+    };
+};
+export const setActiveProject = (obj: any) => {
+    return {
+        type: ActionTypes.SET_ACTIVE_PROJECT,
+        payload: obj,
     };
 };

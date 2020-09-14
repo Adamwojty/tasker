@@ -20,5 +20,7 @@ module.exports = {
     ],
     rules: {
         'react/prop-types': 0,
+        '@typescript-eslint/no-use-before-define': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
     },
 };

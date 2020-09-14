@@ -7,9 +7,9 @@ import { Routes } from '../../config/Routing/Routes';
 
 const navItems = [
     { id: 1, img: '', title: 'Table', path: Routes.TABLE },
-    { id: 2, img: '', title: 'Tasks', path: Routes.TASKS },
-    { id: 3, img: '', title: 'Add Group', path: Routes.ADD_GROUP },
-    { id: 4, img: '', title: 'Add Task', path: Routes.TASKS_ADD },
+    { id: 2, img: '', title: 'Groups', path: Routes.GROUPS },
+    { id: 3, img: '', title: 'Add Task', path: Routes.TASKS_ADD },
+    { id: 4, img: '', title: 'Tasks', path: Routes.TASKS },
     { id: 5, img: '', title: 'Finished Tasks', path: Routes.TASKS_FINISHED },
     { id: 6, img: '', title: 'Settings', path: Routes.SETTINGS },
 ];

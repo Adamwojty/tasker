@@ -14,9 +14,10 @@ interface IInitialValues {
 
 const SignUpView: React.FC = () => {
     const initialValues: IInitialValues = { email: '', password: '' };
+
     return (
         <Wrapper>
-            <Title>Sign Up to tracker</Title>
+            <Title>Sign Up to tasker</Title>
             <Formik
                 initialValues={initialValues}
                 validateOnChange={false}

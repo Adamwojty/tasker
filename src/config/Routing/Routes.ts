@@ -5,7 +5,7 @@ export enum Routes {
     TASKS = '/tasks',
     TASKS_ADD = '/tasks/add',
     TASKS_FINISHED = '/tasks/finished',
-    ADD_GROUP = '/group/add',
+    GROUPS = '/groups',
     SETTINGS = '/settings',
     SIGN_IN = '/signIn',
     SIGN_UP = '/signUp',

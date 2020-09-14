@@ -13,6 +13,7 @@ export enum FontSize {
     LOGO_MOBILE = '20px',
     BIG_HEADER_MOBILE = '30px',
     HEADER_MOBILE = '18px',
+    MID_HEADER_MOBILE = '16px',
     SUB_HEADER_MOBILE = '12px',
     TEXT_MOBILE = '14px',
 

@@ -7,6 +7,7 @@ import { validationSchema } from '../components/auth/actions/validationSchema';
 import { FontSize, Colors } from '../assets/const';
 import { signInSubmit } from '../components/auth/actions/signInSubmit';
 import NavLinks from '../components/auth/NavLinks';
+import { useHistory } from 'react-router';
 
 interface IInitialValues {
     email: string;
@@ -15,15 +16,16 @@ interface IInitialValues {
 const SignInView: React.FC = () => {
     const initialValues: IInitialValues = { email: '', password: '' };
     const { dispatch } = useContext(store);
+    const history = useHistory();
     return (
         <Wrapper>
-            <Title>Sign In to tracker</Title>
+            <Title>Sign In to tasker</Title>
             <Formik
                 initialValues={initialValues}
                 validateOnChange={false}
                 validateOnBlur={false}
                 validationSchema={validationSchema}
-                onSubmit={(values, action) => signInSubmit({ values, action, dispatch })}
+                onSubmit={(values, action) => signInSubmit({ values, action, dispatch, history })}
             >
                 {(props: { errors: string }) => <SignInInputs {...props} />}
             </Formik>

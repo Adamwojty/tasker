@@ -6,8 +6,8 @@ import { Routes } from '../../config/Routing/Routes';
 const Banner: React.FC = () => {
     return (
         <Wrapper>
-            <Logo to="/">tasker</Logo>
-            <NewProject to={Routes.NEW_PROJECT}>New Project</NewProject>
+            <Logo to={Routes.TABLE}>tasker</Logo>
+            <NewProject to={Routes.NEW_PROJECT}>Projects</NewProject>
             <OptionsWrapper>
                 <Settings />
                 <Avatar />

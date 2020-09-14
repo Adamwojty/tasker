@@ -28,7 +28,7 @@ const ProjectInputs: React.FC<IProjectInputs> = ({ errors }) => {
                 placeholder={Fields.PROJECT_PLACEHOLDER}
                 component={Input}
                 error={projectName}
-                value={projectSubmit}
+                value={projectName}
             />
             <Field
                 label={Fields.DESC}
@@ -46,6 +46,5 @@ const FormWrapper = styled(Form)`
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 500px;
 `;
 export default ProjectInputs;
