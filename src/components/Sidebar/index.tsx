@@ -1,20 +1,20 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../assets/const';
+import { store } from '../../config/store';
+import { setSidebarOpen } from '../../config/store/actions';
 import Header from './Header';
 import Navigation from './Navigation';
 
 const Sidebar: React.FC = () => {
-    const [isOpen, setIsOpen] = React.useState<boolean>(true);
-
+    const { sidebarOpen, dispatch } = React.useContext(store);
     const handleOpenNav = React.useCallback(() => {
-        return setIsOpen(!isOpen);
-    }, [isOpen]);
-
+        return dispatch(setSidebarOpen());
+    }, []);
     return (
-        <Wrapper active={isOpen}>
+        <Wrapper active={sidebarOpen}>
             <Header />
-            <Navigation />
+            <Navigation handleOpenNav={handleOpenNav} />
             <Status onClick={handleOpenNav} />
         </Wrapper>
     );
@@ -27,7 +27,7 @@ const Wrapper = styled.section<{ active: boolean }>`
     top: 50px;
     border-right: 2px solid ${Colors.NAV_HOVER};
     z-index: 2;
-    transform: ${({ active }) => (active ? 'translateX(-300px)' : null)};
+    transform: ${({ active }) => (active ? null : 'translateX(-300px)')};
     transition: 0.5s ease-in-out;
 `;
 const Status = styled.button`

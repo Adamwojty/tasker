@@ -19,13 +19,16 @@ interface INavItem {
     title: string;
     path: string;
 }
+interface INav {
+    handleOpenNav: () => void;
+}
 
-const Navigation: React.FC = () => {
+const Navigation: React.FC<INav> = ({ handleOpenNav }) => {
     return (
         <Wrapper>
             <List>
                 {navItems.map((item: INavItem) => (
-                    <li key={item.id}>
+                    <li key={item.id} onClick={handleOpenNav}>
                         <NavItem to={item.path}>
                             <Icon />
                             {item.title}

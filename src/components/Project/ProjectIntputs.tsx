@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Field, Form } from 'formik';
 import Input from '../common/Input';
 import SubmitButton from '../common/SubmitButton';
-import { projectSubmit } from './actions/projectSubmit';
 
 interface IProjectInputs {
     errors: {

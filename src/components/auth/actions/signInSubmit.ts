@@ -24,7 +24,7 @@ export const signInSubmit = async ({ values, action, dispatch, history }: ISignI
         const userProfile = userResponse.data();
         console.log(userProfile);
         dispatch(setUser(userProfile));
-        history.push(Routes.TABLE);
+        history.push(Routes.NEW_PROJECT);
     } catch (err) {
         const errorMessage = err.message;
         console.log(errorMessage);

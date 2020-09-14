@@ -1,5 +1,5 @@
 import { ActionTypes } from '../models';
-import { IAction } from '../models';
+import { Actions } from '../models';
 
 export const initialState = {
     user: {
@@ -7,8 +7,9 @@ export const initialState = {
         projectsId: ['_b5gc2wa1s'],
     },
     activeProject: null,
+    sidebarOpen: false,
 };
-export const reducer = (state = initialState, action: IAction) => {
+export const reducer = (state = initialState, action: Actions | any) => {
     switch (action.type) {
         case ActionTypes.SET_USER:
             return {
@@ -24,6 +25,11 @@ export const reducer = (state = initialState, action: IAction) => {
             return {
                 ...state,
                 activeProject: action.payload,
+            };
+        case ActionTypes.SET_SIDEBAR:
+            return {
+                ...state,
+                sidebarOpen: !state.sidebarOpen,
             };
         default:
             return state;
