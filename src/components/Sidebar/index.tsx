@@ -7,10 +7,13 @@ import Header from './Header';
 import Navigation from './Navigation';
 
 const Sidebar: React.FC = () => {
-    const { sidebarOpen, dispatch } = React.useContext(store);
+    const { sidebarOpen, dispatch, activeProject } = React.useContext(store);
+
     const handleOpenNav = React.useCallback(() => {
-        return dispatch(setSidebarOpen());
-    }, []);
+        if (activeProject) {
+            return dispatch(setSidebarOpen());
+        }
+    }, [activeProject]);
     return (
         <Wrapper active={sidebarOpen}>
             <Header />
