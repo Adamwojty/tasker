@@ -4,7 +4,7 @@ import { store } from '../../../config/store';
 interface IProject {
     projectName: string;
     desc: string;
-    tasks: [];
+    id: string;
 }
 
 export const useProjectsData = () => {
@@ -21,7 +21,11 @@ export const useProjectsData = () => {
     useEffect(() => {
         getProjects();
         return () => {
-            getProjects();
+            const unsubscribe = db
+                .collection('projects')
+                .doc('1')
+                .onSnapshot((snapshot) => setProjects((prevState) => [...prevState, snapshot.data()]));
+            unsubscribe();
         };
     }, [user]);
 

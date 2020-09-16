@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { FontSize, FontWeight, Colors } from '../../assets/const';
+import { store } from '../../config/store';
 import { Icon } from '../common/Icon';
-const PROJECT_INFO = {
-    title: 'tasker',
-    subTitle: 'Projekt oprogramowania nowej generacji',
-};
+
 const Header: React.FC = () => {
+    const { activeProject } = useContext(store);
     return (
         <Wrapper>
             <Icon />
             <div>
-                <Title>{PROJECT_INFO.title}</Title>
-                <SubTitle>{PROJECT_INFO.subTitle}</SubTitle>
+                <Title>{activeProject?.projectName}</Title>
+                <SubTitle>{activeProject?.desc}</SubTitle>
             </div>
         </Wrapper>
     );

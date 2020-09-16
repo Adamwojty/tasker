@@ -31,7 +31,18 @@ export const useGroupsData = () => {
     useEffect(() => {
         getData();
         return () => {
-            getData();
+            const unsubscribe = db
+                .collection('projects')
+                .doc(activeProject?.id)
+                .collection('groups')
+                .onSnapshot((querySnapshot) => {
+                    const groups: any[] = [];
+                    querySnapshot.forEach((doc) => {
+                        groups.push(doc.data());
+                    });
+                    setData(groups);
+                });
+            unsubscribe();
         };
     }, []);
     return { data };
