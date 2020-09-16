@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Formik } from 'formik';
 import GroupsInputs from './GroupsInputs';
 import { store } from '../../config/store';
+import { submitGroup } from './actions/submitGroup';
+import { validationSchema } from './actions/validationSchema';
 
 interface IInitialValues {
     groupName: string;
@@ -10,18 +12,15 @@ interface IInitialValues {
 
 const Groups: React.FC = () => {
     const initialValues: IInitialValues = { groupName: '' };
-    const { user, dispatch } = useContext(store);
+    const { activeProject } = useContext(store);
     return (
         <Wrapper>
             <Formik
                 initialValues={initialValues}
                 validateOnChange={false}
                 validateOnBlur={false}
-                // validationSchema={validationSchema}
-                onSubmit={
-                    (values, action) => console.log('123')
-                    // projectSubmit({ values, action, user, dispatch })
-                }
+                validationSchema={validationSchema}
+                onSubmit={(values, action) => submitGroup({ values, action, projectID: activeProject?.id })}
             >
                 {(props: { errors: IInitialValues; values: IInitialValues }) => <GroupsInputs {...props} />}
             </Formik>

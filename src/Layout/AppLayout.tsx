@@ -2,7 +2,6 @@ import React, { ReactNode, useContext } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../assets/const';
 import Banner from '../components/Banner';
-import Project from '../components/Project';
 import Sidebar from '../components/Sidebar';
 import { store } from '../config/store';
 

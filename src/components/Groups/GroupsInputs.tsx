@@ -27,7 +27,7 @@ const GroupsInputs: React.FC<IGroupsInputs> = ({ errors, values }) => {
                 error={errors.groupName}
                 value={values.groupName}
             />
-            <SubmitButton text="create new project" />
+            <SubmitButton text="create new group" />
         </FormWrapper>
     );
 };

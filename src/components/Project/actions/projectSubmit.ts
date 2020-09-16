@@ -24,6 +24,7 @@ export const projectSubmit = async ({ values, action, user, dispatch }: IProject
         const ID: string = '_' + Math.random().toString(36).substr(2, 9);
         const { projectName, desc } = values;
         await db.collection('projects').doc(ID).set({
+            id: ID,
             projectName,
             desc,
         });
