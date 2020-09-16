@@ -35,6 +35,5 @@ const FormWrapper = styled(Form)`
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 500px;
 `;
 export default GroupsInputs;

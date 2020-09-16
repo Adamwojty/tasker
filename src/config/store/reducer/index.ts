@@ -6,7 +6,11 @@ export const initialState = {
         uid: 'QwtgPwzXUDds1MXhO40i4pWiWEh2',
         projectsId: ['_b5gc2wa1s'],
     },
-    activeProject: null,
+    activeProject: {
+        projectName: 'project1',
+        desc: 'test1',
+        id: '_b5gc2wa1s',
+    },
     sidebarOpen: false,
 };
 export const reducer = (state = initialState, action: Actions | any) => {

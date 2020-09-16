@@ -12,8 +12,7 @@ export const useProjectsData = () => {
     const { user } = useContext(store);
     const getProjects = () => {
         user.projectsId.map(async (id: string) => {
-            await db
-                .collection('projects')
+            db.collection('projects')
                 .doc(id)
                 .onSnapshot((snapshot) => setProjects((prevState) => [...prevState, snapshot.data()]));
         });
