@@ -8,6 +8,7 @@ export enum Colors {
     SEPTENARY = '',
 
     NAV_HOVER = 'rgb(235,236,240)',
+    ERROR = 'rgb(255,0,0)',
 }
 export enum FontSize {
     LOGO_MOBILE = '20px',

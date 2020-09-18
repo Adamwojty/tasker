@@ -9,6 +9,11 @@ interface IGroupItem {
     title: string;
     id: string;
 }
+interface ITask {
+    taskName: string;
+    id: string;
+    desc: string;
+}
 
 const GroupItem: React.FC<IGroupItem> = ({ open, title, id }) => {
     const { data } = useTasksData(id);
@@ -17,7 +22,7 @@ const GroupItem: React.FC<IGroupItem> = ({ open, title, id }) => {
         <>
             <Title>{title}</Title>
             <ContentWrapper open={open}>
-                {data && data.map((task: any) => <Task key={task.id} title={task.taskName} desc={task.desc} />)}
+                {data && data.map((task: ITask) => <Task key={task.id} title={task.taskName} desc={task.desc} />)}
             </ContentWrapper>
         </>
     );

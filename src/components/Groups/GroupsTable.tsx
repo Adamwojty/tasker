@@ -29,7 +29,6 @@ const Wrapper = styled.div`
 `;
 const Title = styled.h3`
     font-size: ${FontSize.MID_HEADER_MOBILE};
-    text-align: center;
     margin-bottom: 10px;
 `;
 export default GroupsTable;

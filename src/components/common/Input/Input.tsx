@@ -24,17 +24,17 @@ const Wrapper = styled.div`
     position: relative;
     margin-bottom: 15px;
 `;
-const Field = styled.input`
+const Field = styled.input<{ error: string }>`
     width: 250px;
     padding: 10px 5px;
     border-radius: 5px;
-    border: 1px solid ${Colors.SECONDARY};
+    border: ${({ error }) => (error ? `1px solid ${Colors.ERROR}` : `1px solid ${Colors.SECONDARY}`)};
 `;
 const Error = styled.p`
     position: absolute;
     top: -15px;
     right: 0;
     font-size: 10px;
-    color: ${Colors.SECONDARY};
+    color: ${Colors.ERROR};
 `;
 export default Input;
