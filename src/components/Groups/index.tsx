@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import GroupsTable from './GroupsTable/GroupsTable';
 import AddGroup from './AddGroup';
@@ -6,13 +6,10 @@ import Controls from './Controls';
 import AddTask from './AddTask';
 
 const Groups: React.FC = () => {
-    const [addGroup, setAddGroup] = useState<boolean>(false);
-    const handleSwitch = useCallback(() => {
-        return setAddGroup(!addGroup);
-    }, [addGroup]);
+    const [addGroup, setAddGroup] = useState<boolean>(true);
     return (
         <Wrapper>
-            <Controls handleSwitch={handleSwitch} addGroup={addGroup} />
+            <Controls setAddGroup={setAddGroup} addGroup={addGroup} />
             {addGroup ? <AddGroup /> : <AddTask />}
             <GroupsTable />
         </Wrapper>

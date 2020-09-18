@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { Colors } from '../../assets/const';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -6,6 +7,7 @@ const GlobalStyle = createGlobalStyle`
       padding:0;
       font-family: 'Noto Sans', sans-serif;
       box-sizing: border-box;
+      outline-color: ${Colors.SECONDARY};
   }
 
   input {

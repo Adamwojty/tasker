@@ -27,6 +27,8 @@ const Wrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 0 10px;
+    z-index: 3;
+    background-color: white;
 `;
 const Logo = styled(Link)`
     color: ${Colors.SECONDARY};
