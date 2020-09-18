@@ -17,6 +17,10 @@ const Banner: React.FC = () => {
 };
 
 const Wrapper = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     border-bottom: 2px solid ${Colors.QUATERNARY};
     height: 50px;
     display: flex;

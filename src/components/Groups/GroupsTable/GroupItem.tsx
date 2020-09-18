@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Colors, FontSize, FontWeight } from '../../assets/const';
-import { useTasksData } from './hooks/useTasksData';
+import { Colors, FontSize, FontWeight } from '../../../assets/const';
+import { useTasksData } from '../hooks/useTasksData';
 import Task from './Task';
 
 interface IGroupItem {

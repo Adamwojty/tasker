@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Colors, FontSize } from '../../assets/const';
+import { Colors, FontSize } from '../../../assets/const';
 
 interface ITask {
     title: string;

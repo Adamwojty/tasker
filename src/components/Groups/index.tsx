@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import GroupsTable from './GroupsTable';
+import GroupsTable from './GroupsTable/GroupsTable';
 import AddGroup from './AddGroup';
 import Controls from './Controls';
 import AddTask from './AddTask';

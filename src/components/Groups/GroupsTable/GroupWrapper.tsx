@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import { Colors } from '../../assets/const';
+import { Colors } from '../../../assets/const';
 import GroupItem from './GroupItem';
 
 interface IGroupWrapper {

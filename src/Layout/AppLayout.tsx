@@ -23,6 +23,7 @@ const AppLayout: React.FC<IApp> = ({ children }) => {
 };
 const Wrapper = styled.div`
     display: flex;
+    padding-top: 50px;
     background-color: ${Colors.MAIN};
     flex-direction: column;
     min-height: 100vh;

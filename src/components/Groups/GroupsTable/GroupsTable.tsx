@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Colors, FontSize } from '../../assets/const';
+import { Colors, FontSize } from '../../../assets/const';
 import GroupWrapper from './GroupWrapper';
-import { useGroupsData } from './hooks/useGroupsData';
+import { useGroupsData } from '../hooks/useGroupsData';
 
 interface IGroup {
     groupName: string;
