@@ -10,6 +10,10 @@ export const initialState = {
         projectName: 'project1',
         desc: 'test1',
         id: '_b5gc2wa1s',
+        groupsOrder: [
+            { id: '_asqzytwh0', groupName: 'group test' },
+            { id: '_b3uwnse89', groupName: 'Open' },
+        ],
     },
     sidebarOpen: false,
 };

@@ -34,19 +34,10 @@ export const useTasksData = (id: string) => {
     useEffect(() => {
         getData();
         return () => {
-            const unsubscribe = db
-                .collection('projects')
-                .doc(activeProject?.id)
-                .collection('groups')
-                .doc(id)
-                .collection('tasks')
-                .onSnapshot((querySnapshot) => {
-                    const tasks: any[] = [];
-                    querySnapshot.forEach((doc) => {
-                        tasks.push(doc.data());
-                    });
-                    setData(tasks);
-                });
+            const unsubscribe = () => {
+                db.collection('projects').doc(activeProject?.id).collection('groups').doc(id).collection('tasks');
+            };
+
             unsubscribe();
         };
     }, []);

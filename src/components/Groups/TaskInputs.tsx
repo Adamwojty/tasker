@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Field, Form } from 'formik';
 
 import styled from 'styled-components';
 import Input from '../common/Input';
 import SubmitButton from '../common/SubmitButton';
-import { useGroupsData } from './hooks/useGroupsData';
 import { Colors } from '../../assets/const';
+import { store } from '../../config/store';
 
 interface IGroupsInputs {
     errors: {
@@ -31,7 +31,7 @@ enum Fields {
 }
 
 const TaskInputs: React.FC<IGroupsInputs> = ({ values, errors, handleChange, handleBlur }) => {
-    const { data } = useGroupsData();
+    const { activeProject } = useContext(store);
     return (
         <FormWrapper>
             <Field
@@ -58,7 +58,7 @@ const TaskInputs: React.FC<IGroupsInputs> = ({ values, errors, handleChange, han
                 onBlur={handleBlur}
             >
                 <option value="">Select group:</option>
-                {data.map((item) => (
+                {activeProject?.groupsOrder.map((item) => (
                     <option key={item.id} value={item.id}>
                         {item.groupName}
                     </option>

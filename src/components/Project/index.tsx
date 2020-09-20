@@ -18,7 +18,6 @@ const Project: React.FC = () => {
     const initialValues: IInitialValues = { projectName: '', desc: '' };
     const { user, dispatch } = useContext(store);
     const { projects } = useProjectsData();
-
     return (
         <Wrapper>
             <Title>Create new Project</Title>

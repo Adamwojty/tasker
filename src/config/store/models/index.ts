@@ -32,6 +32,7 @@ export interface IInitialContext {
         projectName: string;
         desc: string;
         id: string;
+        groupsOrder: { id: string; groupName: string }[];
     } | null;
     sidebarOpen: boolean;
 

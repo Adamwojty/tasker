@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Colors, FontSize } from '../../../assets/const';
 import GroupWrapper from './GroupWrapper';
-import { useGroupsData } from '../hooks/useGroupsData';
+import { store } from '../../../config/store';
 
 interface IGroup {
-    groupName: string;
     id: string;
+    groupName: string;
 }
 
 const GroupsTable: React.FC = () => {
-    const { data } = useGroupsData();
+    const { activeProject } = useContext(store);
     return (
         <Wrapper>
             <Title>Groups:</Title>
-            {data.map((group: IGroup) => (
-                <GroupWrapper key={group.id} {...group} />
+            {activeProject?.groupsOrder.map((group: IGroup) => (
+                <GroupWrapper key={group.id} id={group.id} />
             ))}
         </Wrapper>
     );

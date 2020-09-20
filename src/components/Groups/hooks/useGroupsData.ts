@@ -7,22 +7,16 @@ interface IGroup {
     id: string;
 }
 
-export const useGroupsData = () => {
-    const [data, setData] = useState<IGroup[]>([]);
+export const useGroupsData = (id: string) => {
+    const [group, setGroup] = useState<any>();
     const { activeProject } = useContext(store);
-
     const getData = async () => {
         try {
             db.collection('projects')
                 .doc(activeProject?.id)
                 .collection('groups')
-                .onSnapshot((querySnapshot) => {
-                    const groups: any[] = [];
-                    querySnapshot.forEach((doc) => {
-                        groups.push(doc.data());
-                    });
-                    setData(groups);
-                });
+                .doc(id)
+                .onSnapshot((snapshot) => setGroup(snapshot.data()));
         } catch (err) {
             console.error(err);
         }
@@ -31,19 +25,11 @@ export const useGroupsData = () => {
     useEffect(() => {
         getData();
         return () => {
-            const unsubscribe = db
-                .collection('projects')
-                .doc(activeProject?.id)
-                .collection('groups')
-                .onSnapshot((querySnapshot) => {
-                    const groups: any[] = [];
-                    querySnapshot.forEach((doc) => {
-                        groups.push(doc.data());
-                    });
-                    setData(groups);
-                });
+            const unsubscribe = () => {
+                db.collection('projects').doc(activeProject?.id).collection('groups').doc(id);
+            };
             unsubscribe();
         };
     }, []);
-    return { data };
+    return { group };
 };

@@ -4,11 +4,10 @@ import { Colors } from '../../../assets/const';
 import GroupItem from './GroupItem';
 
 interface IGroupWrapper {
-    groupName: string;
     id: string;
 }
 
-const GroupWrapper: React.FC<IGroupWrapper> = ({ groupName, id }) => {
+const GroupWrapper: React.FC<IGroupWrapper> = ({ id }) => {
     const [open, setOpen] = useState<boolean>(true);
     const handleOpenGroup = useCallback(() => {
         setOpen(!open);
@@ -16,7 +15,7 @@ const GroupWrapper: React.FC<IGroupWrapper> = ({ groupName, id }) => {
     return (
         <Wrapper>
             <Controls onClick={handleOpenGroup} />
-            <GroupItem open={open} title={groupName} id={id} />
+            <GroupItem open={open} id={id} />
         </Wrapper>
     );
 };

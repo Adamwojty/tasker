@@ -1,13 +1,21 @@
 export interface IDragColumn {
-    id: number;
+    id: string;
     text: string;
-    moveCol: (id: number, to: number) => void;
-    findCol: (id: number) => { index: number };
+    moveCol: (id: string, to?: number) => void;
+    findCol: (
+        id: string,
+    ) => {
+        column?: {
+            id?: string;
+            groupName?: string;
+        };
+        index?: number;
+    };
 }
 export interface IDragCol {
     type: string;
-    id: number;
-    originalIndex: number;
+    id: string;
+    originalIndex: string;
 }
 export interface ICol {
     text: string;
