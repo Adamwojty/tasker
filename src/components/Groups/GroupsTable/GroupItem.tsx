@@ -2,27 +2,28 @@ import React from 'react';
 import styled from 'styled-components';
 import { Colors, FontSize, FontWeight } from '../../../assets/const';
 import { useGroupsData } from '../hooks/useGroupsData';
-import { useTasksData } from '../hooks/useTasksData';
 import Task from './Task';
 
-interface IGroupItem {
+interface IGroupItemProps {
     open: boolean;
     id: string;
 }
+
 interface ITask {
     taskName: string;
     id: string;
     desc: string;
 }
 
-const GroupItem: React.FC<IGroupItem> = ({ open, id }) => {
-    const { data } = useTasksData(id);
+const GroupItem: React.FC<IGroupItemProps> = ({ open, id }) => {
     const { group } = useGroupsData(id);
     return (
         <>
             <Title>{group?.groupName}</Title>
             <ContentWrapper open={open}>
-                {data && data.map((task: ITask) => <Task key={task.id} title={task.taskName} desc={task.desc} />)}
+                {group?.taskOrder.map((task: ITask) => (
+                    <Task key={task.id} title={task.taskName} desc={task.desc} />
+                ))}
             </ContentWrapper>
         </>
     );

@@ -21,6 +21,11 @@ interface IProject {
     projectName: string;
     desc: string;
 }
+interface ITask {
+    taskName: string;
+    desc: string;
+    id: string;
+}
 
 // Context
 export interface IInitialContext {
@@ -28,12 +33,14 @@ export interface IInitialContext {
         uid: string;
         projectsId: string[];
     };
+
     activeProject: {
         projectName: string;
         desc: string;
         id: string;
-        groupsOrder: { id: string; groupName: string }[];
+        groupsOrder: { id: string; groupName: string; taskOrder: ITask[] }[];
     } | null;
+
     sidebarOpen: boolean;
 
     dispatch: ({ type, payload }: { type: string; payload: any }) => void;

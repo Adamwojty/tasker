@@ -1,15 +1,16 @@
+//drag/drop
 export interface IDragColumn {
     id: string;
     text: string;
-    moveCol: (id: string, to?: number) => void;
+    moveCol: (id: string, to: number) => void;
     findCol: (
         id: string,
     ) => {
-        column?: {
-            id?: string;
-            groupName?: string;
+        column: {
+            id: string;
+            groupName: string;
         };
-        index?: number;
+        index: number;
     };
 }
 export interface IDragCol {
@@ -20,4 +21,17 @@ export interface IDragCol {
 export interface ICol {
     text: string;
     isDragging: boolean;
+}
+
+// other
+interface ITask {
+    taskName: string;
+    id: string;
+    desc: string;
+}
+
+export interface IGroups {
+    id: string;
+    groupName: string;
+    taskOrder: ITask[];
 }

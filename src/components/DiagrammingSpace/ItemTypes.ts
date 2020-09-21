@@ -1,4 +1,4 @@
 export enum ItemTypes {
-    COLUMN = 'red',
-    ITEM = 'green',
+    COLUMN = 'groups',
+    ITEM = 'tasks',
 }

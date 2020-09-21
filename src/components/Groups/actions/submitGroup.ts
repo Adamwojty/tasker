@@ -1,6 +1,7 @@
 import { db } from '../../../config/firebase/firebaseInit';
 import { FormikState } from 'formik';
 import firebase from 'firebase';
+import { randomID } from '../../common/actions/randomID';
 
 interface IValues {
     groupName: string;
@@ -16,7 +17,7 @@ interface IGroup {
 export const submitGroup = async ({ values, action, projectID }: IGroup) => {
     try {
         const { groupName } = values;
-        const ID: string = '_' + Math.random().toString(36).substr(2, 9);
+        const ID: string = randomID();
         await db.collection('projects').doc(projectID).collection('groups').doc(ID).set({ groupName, id: ID });
         await db
             .collection('projects')

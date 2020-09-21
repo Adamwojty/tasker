@@ -39,6 +39,7 @@ const DraggableColumn: React.FC<IDragColumn> = ({ id, text, moveCol, findCol }) 
 };
 
 const Wrapper = styled.div`
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     margin: 20px;

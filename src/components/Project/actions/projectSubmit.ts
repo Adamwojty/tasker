@@ -1,7 +1,8 @@
+import firebase from 'firebase';
 import { db } from '../../../config/firebase/firebaseInit';
 import { FormikState } from 'formik';
 import { addProjectId } from '../../../config/store/actions';
-import firebase from 'firebase';
+import { randomID } from '../../common/actions/randomID';
 
 interface IValues {
     projectName: string;
@@ -17,11 +18,11 @@ interface IProject {
         uid: string;
         projectsId: string[];
     } | null;
-    dispatch: ({ type, payload }: { type: string; payload: any }) => void;
+    dispatch: ({ type, payload }: { type: string; payload: unknown }) => void;
 }
 export const projectSubmit = async ({ values, action, user, dispatch }: IProject) => {
     try {
-        const ID: string = '_' + Math.random().toString(36).substr(2, 9);
+        const ID: string = randomID();
         const { projectName, desc } = values;
         await db.collection('projects').doc(ID).set({
             id: ID,

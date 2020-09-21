@@ -1,5 +1,7 @@
 import { db } from '../../../config/firebase/firebaseInit';
 import { FormikState } from 'formik';
+import { randomID } from '../../common/actions/randomID';
+import firebase from 'firebase';
 
 interface IValues {
     taskName: string;
@@ -17,19 +19,13 @@ interface ITask {
 export const submitTask = async ({ values, action, projectID }: ITask) => {
     try {
         const { taskName, desc, groupID } = values;
-        const ID: string = '_' + Math.random().toString(36).substr(2, 9);
+        const ID: string = randomID();
         await db
             .collection('projects')
             .doc(projectID)
             .collection('groups')
             .doc(groupID)
-            .collection('tasks')
-            .doc(ID)
-            .set({
-                taskName,
-                desc,
-                id: ID,
-            });
+            .update({ taskOrder: firebase.firestore.FieldValue.arrayUnion({ taskName, desc, id: ID }) });
         action.resetForm();
     } catch (err) {
         action.setErrors({ taskName: 'server error' });
