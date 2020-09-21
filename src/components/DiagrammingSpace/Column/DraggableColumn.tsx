@@ -5,7 +5,7 @@ import { ItemTypes } from '../ItemTypes';
 import { IDragColumn, IDragCol } from '../models';
 import Column from './Column';
 
-const DraggableColumn: React.FC<IDragColumn> = ({ id, text, moveCol, findCol }) => {
+const DraggableColumn: React.FC<IDragColumn> = ({ id, text, moveCol, findCol, tasks }) => {
     const originalIndex = findCol(id).index;
     const [{ isDragging }, drag] = useDrag({
         item: { type: ItemTypes.COLUMN, id, originalIndex },
@@ -33,7 +33,7 @@ const DraggableColumn: React.FC<IDragColumn> = ({ id, text, moveCol, findCol }) 
     });
     return (
         <Wrapper ref={(node) => drag(drop(node))}>
-            <Column isDragging={isDragging} text={text} />
+            <Column isDragging={isDragging} text={text} tasks={tasks} />
         </Wrapper>
     );
 };

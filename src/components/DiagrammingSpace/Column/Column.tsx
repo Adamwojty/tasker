@@ -1,13 +1,49 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
+import update from 'immutability-helper';
 import styled from 'styled-components';
 import { Colors, FontSize, FontWeight } from '../../../assets/const';
-import { ICol } from '../models';
+import { ItemTypes } from '../ItemTypes';
+import { ICol, ITask } from '../models';
+import DraggableTask from '../Task/DraggableTask';
+import { useDrop } from 'react-dnd';
 
-const Column: React.FC<ICol> = ({ text, isDragging }) => {
+const Column: React.FC<ICol> = ({ text, isDragging, tasks }) => {
+    const [taskOrder, setTaskOrder] = useState<ITask[]>(tasks);
+
+    const moveTask = useCallback(
+        (id: string, atIndex: number) => {
+            const { item, index } = findTask(id);
+            setTaskOrder(
+                update(taskOrder, {
+                    $splice: [
+                        [index, 1],
+                        [atIndex, 0, item],
+                    ],
+                }),
+            );
+        },
+        [taskOrder],
+    );
+    const findTask = useCallback(
+        (id: string) => {
+            const item = taskOrder.filter((c) => `${c.id}` === id)[0];
+            const index = taskOrder.indexOf(item);
+            return {
+                item,
+                index,
+            };
+        },
+        [taskOrder],
+    );
+    const renderTask = (task: ITask, findTask: any, moveTask: any) => {
+        return <DraggableTask {...task} key={task.id} moveTask={moveTask} findTask={findTask} />;
+    };
+
+    const [, drop] = useDrop({ accept: ItemTypes.ITEM });
     return (
         <>
             <Title isDragging={isDragging}>{text}</Title>
-            <Col />
+            <Col ref={drop}>{taskOrder && taskOrder.map((task: ITask) => renderTask(task, findTask, moveTask))}</Col>
         </>
     );
 };
@@ -21,7 +57,7 @@ const Title = styled.div<{ isDragging: boolean }>`
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     font-size: ${FontSize.HEADER_MOBILE};
-    font-weight: ${FontWeight.REGULAR};
+    font-weight: ${FontWeight.BOLD};
     text-align: center;
     background-color: ${({ isDragging }) => (isDragging ? Colors.SECONDARY : Colors.QUINARY)};
     color: ${({ isDragging }) => (isDragging ? Colors.MAIN : Colors.TERITIARY)};

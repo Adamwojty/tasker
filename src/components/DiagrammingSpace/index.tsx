@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { ItemTypes } from './ItemTypes';
 import { store } from '../../config/store';
 import { renderColumn } from './actions/renderColumn';
-import { IGroups } from './models';
+import { IGroups, ITask } from './models';
 
 const DiagramingSpace: React.FC = () => {
     const { activeProject } = useContext(store);
@@ -47,7 +47,9 @@ const DiagramingSpace: React.FC = () => {
     return (
         <Wrapper>
             <DraggableSpace ref={drop}>
-                {columns.map((col: { id: string; groupName: string }) => renderColumn(col, findCol, moveCol))}
+                {columns.map((col: { id: string; groupName: string; taskOrder: ITask[] }) =>
+                    renderColumn(col, findCol, moveCol),
+                )}
             </DraggableSpace>
         </Wrapper>
     );

@@ -1,8 +1,9 @@
 import React from 'react';
-import DraggableColumn from '../Column';
+import DraggableColumn from '../Column/DraggableColumn';
+import { ITask } from '../models';
 
 export const renderColumn = (
-    col: { id: string; groupName: string },
+    col: { id: string; groupName: string; taskOrder: ITask[] },
     findCol: (
         id: string,
     ) => {
@@ -14,5 +15,14 @@ export const renderColumn = (
     },
     moveCol: (id: string, to: number) => void,
 ) => {
-    return <DraggableColumn key={col.id} id={col.id} text={col.groupName} moveCol={moveCol} findCol={findCol} />;
+    return (
+        <DraggableColumn
+            key={col.id}
+            id={col.id}
+            text={col.groupName}
+            moveCol={moveCol}
+            findCol={findCol}
+            tasks={col.taskOrder}
+        />
+    );
 };
