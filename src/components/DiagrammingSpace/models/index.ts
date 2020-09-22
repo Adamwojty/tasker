@@ -2,7 +2,7 @@
 export interface IDragColumn {
     id: string;
     text: string;
-    moveCol: (id: string, to: number) => void;
+    moveCol: (id: string, to: number, didDrop?: boolean) => void;
     findCol: (
         id: string,
     ) => {

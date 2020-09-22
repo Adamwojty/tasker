@@ -16,7 +16,7 @@ const DraggableColumn: React.FC<IDragColumn> = ({ id, text, moveCol, findCol, ta
             const { id: droppedId, originalIndex } = monitor.getItem();
             const didDrop = monitor.didDrop();
             if (!didDrop) {
-                moveCol(droppedId, originalIndex);
+                moveCol(droppedId, originalIndex, !didDrop);
             }
         },
     });

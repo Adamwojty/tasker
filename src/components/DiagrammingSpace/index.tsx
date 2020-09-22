@@ -6,22 +6,26 @@ import { ItemTypes } from './ItemTypes';
 import { store } from '../../config/store';
 import { renderColumn } from './actions/renderColumn';
 import { IGroups, ITask } from './models';
+import { updateGroups } from './actions/updateGroups';
 
 const DiagramingSpace: React.FC = () => {
     const { activeProject } = useContext(store);
     const [columns, setColumns] = useState<IGroups[]>([]);
 
     const moveCol = useCallback(
-        (id: string, atIndex: number) => {
+        (id: string, atIndex: number, didDrop?: boolean) => {
             const { column, index } = findCol(id);
-            setColumns(
-                update(columns, {
-                    $splice: [
-                        [index, 1],
-                        [atIndex, 0, column],
-                    ],
-                }),
-            );
+
+            const newColOrder = update(columns, {
+                $splice: [
+                    [index, 1],
+                    [atIndex, 0, column],
+                ],
+            });
+            setColumns(newColOrder);
+            if (!didDrop) {
+                return updateGroups(newColOrder, activeProject?.id);
+            }
         },
         [columns],
     );
@@ -38,12 +42,16 @@ const DiagramingSpace: React.FC = () => {
         [columns],
     );
 
-    const [, drop] = useDrop({ accept: ItemTypes.COLUMN });
+    const [, drop] = useDrop({
+        accept: ItemTypes.COLUMN,
+    });
+
     useEffect(() => {
-        if (activeProject) {
+        if (activeProject && !columns.length) {
             setColumns(activeProject.groupsOrder);
         }
-    }, []);
+    }, [activeProject]);
+
     return (
         <Wrapper>
             <DraggableSpace ref={drop}>
