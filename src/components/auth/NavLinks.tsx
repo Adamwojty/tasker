@@ -25,7 +25,7 @@ const Nav = styled(Link)`
     margin-bottom: 10px;
     color: ${Colors.SECONDARY};
     font-size: ${FontSize.TEXT_MOBILE};
-    background-color: ${Colors.QUATERNARY};
+    background-color: ${Colors.MAIN};
     :nth-of-type(2) {
         margin-left: 10px;
     }

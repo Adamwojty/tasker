@@ -19,26 +19,38 @@ const SignInView: React.FC = () => {
     const history = useHistory();
     return (
         <Wrapper>
-            <Title>Sign In to tasker</Title>
-            <Formik
-                initialValues={initialValues}
-                validateOnChange={false}
-                validateOnBlur={false}
-                validationSchema={validationSchema}
-                onSubmit={(values, action) => signInSubmit({ values, action, dispatch, history })}
-            >
-                {(props: { errors: string }) => <SignInInputs {...props} />}
-            </Formik>
-            <NavLinks register={false} />
+            <ContentWrapper>
+                <Title>Sign In to tasker</Title>
+                <Formik
+                    initialValues={initialValues}
+                    validateOnChange={false}
+                    validateOnBlur={false}
+                    validationSchema={validationSchema}
+                    onSubmit={(values, action) => signInSubmit({ values, action, dispatch, history })}
+                >
+                    {(props: { errors: string }) => <SignInInputs {...props} />}
+                </Formik>
+                <NavLinks register={false} />
+            </ContentWrapper>
         </Wrapper>
     );
 };
 const Wrapper = styled.main`
     display: flex;
-    height: 100vh;
     flex-direction: column;
-    justify-content: center;
+    width: 100vw;
+    height: 100vh;
     align-items: center;
+`;
+const ContentWrapper = styled.section`
+    display: flex;
+    width: 320px;
+    flex-direction: column;
+    align-items: center;
+    margin: 150px 0;
+    padding: 75px 0;
+    background-color: ${Colors.QUATERNARY};
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 `;
 const Title = styled.h1`
     font-size: ${FontSize.BIG_HEADER_MOBILE};
