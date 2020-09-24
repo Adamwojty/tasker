@@ -1,8 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import { Colors } from '../../../assets/const';
 import GroupItem from './GroupItem';
-
+import ToggleIcon from '../../../assets/img/icons/toggle.svg';
 interface IGroupWrapper {
     id: string;
 }
@@ -10,11 +9,11 @@ interface IGroupWrapper {
 const GroupWrapper: React.FC<IGroupWrapper> = ({ id }) => {
     const [open, setOpen] = useState<boolean>(true);
     const handleOpenGroup = useCallback(() => {
-        setOpen(!open);
+        return setOpen(!open);
     }, [open]);
     return (
         <Wrapper>
-            <Controls onClick={handleOpenGroup} />
+            <Controls onClick={handleOpenGroup} url={ToggleIcon} open={open} />
             <GroupItem open={open} id={id} />
         </Wrapper>
     );
@@ -26,14 +25,16 @@ const Wrapper = styled.article`
     margin-bottom: 10px;
     position: relative;
 `;
-const Controls = styled.button`
+const Controls = styled.button<{ url: string; open: boolean }>`
+    background-image: ${({ url }) => `url(${url})`};
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: ${({ open }) => (open ? 'rotate(180deg)' : 'rotate(0deg)')};
     position: absolute;
     width: 25px;
     height: 25px;
-    border-radius: 50%;
     border: 0;
-    background-color: ${Colors.SECONDARY};
     top: 10px;
-    right: 0;
+    right: 5px;
 `;
 export default GroupWrapper;

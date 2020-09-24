@@ -4,12 +4,16 @@ import { Link } from 'react-router-dom';
 import { Colors, FontSize } from '../../assets/const';
 import { Icon } from '../common/Icon';
 import { Routes } from '../../config/Routing/Routes';
+import TableIcon from '../../assets/img/icons/table.svg';
+import TasksIcon from '../../assets/img/icons/tasks.svg';
+import FinishedIcon from '../../assets/img/icons/finished.svg';
+import SettingsIcon from '../../assets/img/icons/settings.svg';
 
 const navItems = [
-    { id: 1, img: '', title: 'Table', path: Routes.TABLE },
-    { id: 2, img: '', title: 'Groups/Tasks', path: Routes.GROUPS },
-    { id: 3, img: '', title: 'Finished Tasks', path: Routes.TASKS_FINISHED },
-    { id: 4, img: '', title: 'Settings', path: Routes.SETTINGS },
+    { id: 1, img: TableIcon, title: 'Table', path: Routes.TABLE },
+    { id: 2, img: TasksIcon, title: 'Groups/Tasks', path: Routes.GROUPS },
+    { id: 3, img: FinishedIcon, title: 'Finished Tasks', path: Routes.TASKS_FINISHED },
+    { id: 4, img: SettingsIcon, title: 'Settings', path: Routes.SETTINGS },
 ];
 interface INavItem {
     id: number;
@@ -28,7 +32,7 @@ const Navigation: React.FC<INav> = ({ handleOpenNav }) => {
                 {navItems.map((item: INavItem) => (
                     <li key={item.id} onClick={handleOpenNav}>
                         <NavItem to={item.path}>
-                            <Icon />
+                            <Icon url={item.img} />
                             {item.title}
                         </NavItem>
                     </li>

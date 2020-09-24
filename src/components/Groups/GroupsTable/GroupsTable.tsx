@@ -5,17 +5,13 @@ import GroupWrapper from './GroupWrapper';
 import { store } from '../../../config/store';
 import Spinner from '../../common/Spinner';
 
-interface IGroup {
-    id: string;
-}
-
 const GroupsTable: React.FC = () => {
     const { activeProject } = useContext(store);
     return (
         <Wrapper>
             <Title>Groups:</Title>
             {activeProject ? (
-                activeProject.groupsOrder.map((group: any) => <GroupWrapper key={group.id} id={group.id} />)
+                activeProject.groupsOrder.map((group: { id: string }) => <GroupWrapper key={group.id} id={group.id} />)
             ) : (
                 <Spinner />
             )}

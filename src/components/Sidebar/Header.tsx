@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import { FontSize, FontWeight, Colors } from '../../assets/const';
 import { store } from '../../config/store';
 import { Icon } from '../common/Icon';
+import ProjectIcon from '../../assets/img/icons/project.svg';
 
 const Header: React.FC = () => {
     const { activeProject } = useContext(store);
     return (
         <Wrapper>
-            <Icon />
+            <Icon url={ProjectIcon} />
             <div>
                 <Title>{activeProject?.projectName}</Title>
                 <SubTitle>{activeProject?.desc}</SubTitle>

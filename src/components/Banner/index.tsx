@@ -1,16 +1,23 @@
-import * as React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Colors, FontWeight, FontSize } from '../../assets/const';
 import { Routes } from '../../config/Routing/Routes';
+import ExitIcon from '../../assets/img/icons/exit.svg';
+import SettingsIcon from '../../assets/img/icons/settings.svg';
 const Banner: React.FC = () => {
+    const history = useHistory();
+    const handleLogout = useCallback(() => {
+        return history.push(Routes.MAIN);
+    }, []);
     return (
         <Wrapper>
             <Logo to={Routes.TABLE}>tasker</Logo>
-            <NewProject to={Routes.NEW_PROJECT}>Projects</NewProject>
+
             <OptionsWrapper>
-                <Settings />
-                <Avatar />
+                <NewProject to={Routes.NEW_PROJECT}>Projects</NewProject>
+                <Settings url={SettingsIcon} />
+                <Exit url={ExitIcon} onClick={handleLogout} />
             </OptionsWrapper>
         </Wrapper>
     );
@@ -43,18 +50,24 @@ const NewProject = styled(Link)`
 `;
 const OptionsWrapper = styled.div`
     display: flex;
-    width: 80px;
-    justify-content: right;
+    width: 200px;
+    justify-content: space-between;
 `;
-const Avatar = styled.div`
-    margin-left: 10px;
-    border-radius: 50%;
+const Exit = styled.a<{ url: string }>`
+    cursor: pointer;
+    background-image: ${({ url }) => `url(${url})`};
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 5px;
     height: 30px;
     width: 30px;
     background-color: ${Colors.QUATERNARY};
 `;
-const Settings = styled.div`
-    border-radius: 50%;
+const Settings = styled.div<{ url: string }>`
+    background-image: ${({ url }) => `url(${url})`};
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 5px;
     height: 30px;
     width: 30px;
     background-color: ${Colors.QUATERNARY};
