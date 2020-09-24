@@ -3,8 +3,9 @@ import { db } from '../../../config/firebase/firebaseInit';
 import { store } from '../../../config/store';
 
 interface IGroup {
-    groupName: string;
     id: string;
+    groupName: string;
+    taskOrder: string[];
 }
 
 export const useGroupsData = (id: string) => {

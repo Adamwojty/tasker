@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Field, Form } from 'formik';
-
 import styled from 'styled-components';
 import Input from '../common/Input';
 import SubmitButton from '../common/SubmitButton';
 import { Colors } from '../../assets/const';
-import { store } from '../../config/store';
+import { useGetGroups } from './hooks/useGetGroups';
+import Spinner from '../common/Spinner';
 
 interface IGroupsInputs {
     errors: {
@@ -31,7 +31,7 @@ enum Fields {
 }
 
 const TaskInputs: React.FC<IGroupsInputs> = ({ values, errors, handleChange, handleBlur }) => {
-    const { activeProject } = useContext(store);
+    const { data } = useGetGroups();
     return (
         <FormWrapper>
             <Field
@@ -58,7 +58,7 @@ const TaskInputs: React.FC<IGroupsInputs> = ({ values, errors, handleChange, han
                 onBlur={handleBlur}
             >
                 <option value="">Select group:</option>
-                {activeProject?.groupsOrder.map((item) => (
+                {data?.map((item: { id: string; groupName: string }) => (
                     <option key={item.id} value={item.id}>
                         {item.groupName}
                     </option>

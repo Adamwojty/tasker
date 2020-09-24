@@ -1,22 +1,13 @@
-//drag/drop
+//COLUMNS
 export interface IDragColumn {
     id: string;
-    text: string;
     moveCol: (id: string, to: number, didDrop?: boolean) => void;
     findCol: (
         id: string,
     ) => {
-        column: {
-            id: string;
-            groupName: string;
-        };
+        column: { id: string };
         index: number;
     };
-    tasks: {
-        taskName: string;
-        id: string;
-        desc: string;
-    }[];
 }
 export interface IDragCol {
     type: string;
@@ -24,32 +15,31 @@ export interface IDragCol {
     originalIndex: string;
 }
 export interface ICol {
-    text: string;
     isDragging: boolean;
-    tasks: ITask[];
+    colId: number;
+    groupId: string;
 }
-
-// other
-export interface IDragTask extends ITask {
-    moveTask: (id: string, to: number) => void;
+// TASKS
+export interface IDragTask {
+    moveTask: (id: string, to: number, colId: string) => void;
     findTask: (
         id: string,
+        colId: string,
     ) => {
-        item: {
-            id: string;
-            taskName: string;
-        };
+        item: string;
         index: number;
     };
+    colId: number;
+    id: string;
+    groupId: string;
 }
 export interface ITask {
-    taskName: string;
-    id: string;
-    desc: string;
+    taskName?: string;
+    desc?: string;
 }
 
-export interface IGroups {
+export interface IDraggedTask {
     id: string;
-    groupName: string;
-    taskOrder: ITask[];
+    colId: number;
+    type: string;
 }

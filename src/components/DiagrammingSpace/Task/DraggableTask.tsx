@@ -1,46 +1,23 @@
 import React from 'react';
-import { useDrag, useDrop } from 'react-dnd';
 import styled from 'styled-components';
 import { Colors } from '../../../assets/const';
-import { ItemTypes } from '../ItemTypes';
+import { useTasksData } from '../../common/hooks/useTasksData';
+import { useDragTask } from '../hooks/useDragTask';
 import { IDragTask } from '../models';
 import Task from './Task';
 
-const DraggableTask: React.FC<IDragTask> = ({ taskName, desc, id, moveTask, findTask }) => {
-    const originalIndex = findTask(id).index;
-    const [{ isDragging }, drag] = useDrag({
-        item: { type: ItemTypes.ITEM, id, originalIndex },
-        collect: (monitor) => ({
-            isDragging: monitor.isDragging(),
-        }),
-        end: (dropResult, monitor) => {
-            const { id: droppedId, originalIndex } = monitor.getItem();
-            const didDrop = monitor.didDrop();
-            if (!didDrop) {
-                console.log('drop');
-                moveTask(droppedId, originalIndex);
-            }
-        },
-    });
-
-    const [, drop] = useDrop({
-        accept: ItemTypes.ITEM,
-        canDrop: () => false,
-        hover({ id: draggedId }: any) {
-            if (draggedId !== id) {
-                const { index: overIndex } = findTask(id);
-                moveTask(draggedId, overIndex);
-            }
-        },
-    });
+const DraggableTask: React.FC<IDragTask> = ({ id, moveTask, findTask, colId, groupId }) => {
+    const { drop, drag } = useDragTask(findTask, moveTask, colId, id, groupId);
+    const { data } = useTasksData(id, groupId);
     return (
         <Wrapper ref={(node) => drag(drop(node))}>
-            <Task taskName={taskName} desc={desc} id={id} />
+            <Task taskName={data?.taskName} desc={data?.desc} />
         </Wrapper>
     );
 };
 const Wrapper = styled.div`
-    margin: 5px;
+    width: 100%;
+    margin: 5px 0;
     padding: 10px 5px;
     background: ${Colors.MAIN};
     color: ${Colors.TERITIARY};

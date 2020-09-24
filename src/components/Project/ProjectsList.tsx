@@ -2,9 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Colors, FontSize } from '../../assets/const';
 import ProjectItem from './ProjectItem';
+import Spinner from '../common/Spinner';
 interface IProject {
     projectName: string;
     desc: string;
+    id: string;
+    groupsOrder: { id: string }[];
 }
 
 interface IProjList {
@@ -15,9 +18,11 @@ const ProjectList: React.FC<IProjList> = ({ projects }) => {
     return (
         <Wrapper>
             <Title>Your projects:</Title>
-            {projects.map((item: IProject) => (
-                <ProjectItem project={item} key={item.projectName} />
-            ))}
+            {projects.length ? (
+                projects.map((item: IProject) => <ProjectItem project={item} key={item.projectName} />)
+            ) : (
+                <Spinner />
+            )}
         </Wrapper>
     );
 };

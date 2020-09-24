@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Colors, FontSize, FontWeight } from '../../../assets/const';
-import { useGroupsData } from '../hooks/useGroupsData';
+import { useGroupsData } from '../../common/hooks/useGroupsData';
+import Spinner from '../../common/Spinner';
 import Task from './Task';
 
 interface IGroupItemProps {
@@ -10,9 +11,7 @@ interface IGroupItemProps {
 }
 
 interface ITask {
-    taskName: string;
     id: string;
-    desc: string;
 }
 
 const GroupItem: React.FC<IGroupItemProps> = ({ open, id }) => {
@@ -21,9 +20,11 @@ const GroupItem: React.FC<IGroupItemProps> = ({ open, id }) => {
         <>
             <Title>{group?.groupName}</Title>
             <ContentWrapper open={open}>
-                {group?.taskOrder.map((task: ITask) => (
-                    <Task key={task.id} title={task.taskName} desc={task.desc} />
-                ))}
+                {group ? (
+                    group.taskOrder.map((task: ITask) => <Task key={task.id} id={task.id} groupID={id} />)
+                ) : (
+                    <Spinner />
+                )}
             </ContentWrapper>
         </>
     );

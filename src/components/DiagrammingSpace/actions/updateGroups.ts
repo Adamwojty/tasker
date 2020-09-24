@@ -1,9 +1,7 @@
 import { db } from '../../../config/firebase/firebaseInit';
-import { IGroups } from '../models';
 
-export const updateGroups = async (groups: IGroups[], projectID?: string) => {
+export const updateGroups = async (groups: { id: string }[], projectID?: string) => {
     try {
-        console.log(groups);
         await db.collection('projects').doc(projectID).update({
             groupsOrder: groups,
         });

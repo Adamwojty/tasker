@@ -4,6 +4,7 @@ export enum ActionTypes {
     SET_USER = 'SET_USER',
     ADD_PROJECT_ID = 'ADD_PROJECT_ID',
     SET_ACTIVE_PROJECT = 'SET_ACTIVE_PROJECT',
+    SET_GROUPS_ORDER = 'SET_GROUPS_ORDER',
     SET_SIDEBAR = 'SET_SIDEBAR',
 }
 
@@ -34,13 +35,13 @@ export interface IInitialContext {
         projectsId: string[];
     };
 
-    activeProject: {
-        projectName: string;
-        desc: string;
+    activeProject?: {
         id: string;
-        groupsOrder: { id: string; groupName: string; taskOrder: ITask[] }[];
-    } | null;
-
+        desc: string;
+        projectName: string;
+        groupsOrder: { id: string }[];
+    };
+    groupsOrder: { id: string }[];
     sidebarOpen: boolean;
 
     dispatch: ({ type, payload }: { type: string; payload: any }) => void;
@@ -53,4 +54,5 @@ export type Actions =
     | { type: ActionTypes.SET_USER; payload: IUser }
     | { type: ActionTypes.ADD_PROJECT_ID; payload: IProjectId }
     | { type: ActionTypes.SET_SIDEBAR; payload: any }
-    | { type: ActionTypes.SET_ACTIVE_PROJECT; payload: IProject };
+    | { type: ActionTypes.SET_ACTIVE_PROJECT; payload: IProject }
+    | { type: ActionTypes.SET_GROUPS_ORDER; payload: string[] };

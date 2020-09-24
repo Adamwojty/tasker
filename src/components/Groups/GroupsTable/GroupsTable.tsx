@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { Colors, FontSize } from '../../../assets/const';
 import GroupWrapper from './GroupWrapper';
 import { store } from '../../../config/store';
+import Spinner from '../../common/Spinner';
 
 interface IGroup {
     id: string;
-    groupName: string;
 }
 
 const GroupsTable: React.FC = () => {
@@ -14,9 +14,11 @@ const GroupsTable: React.FC = () => {
     return (
         <Wrapper>
             <Title>Groups:</Title>
-            {activeProject?.groupsOrder.map((group: IGroup) => (
-                <GroupWrapper key={group.id} id={group.id} />
-            ))}
+            {activeProject ? (
+                activeProject.groupsOrder.map((group: any) => <GroupWrapper key={group.id} id={group.id} />)
+            ) : (
+                <Spinner />
+            )}
         </Wrapper>
     );
 };

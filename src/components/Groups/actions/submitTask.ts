@@ -25,7 +25,15 @@ export const submitTask = async ({ values, action, projectID }: ITask) => {
             .doc(projectID)
             .collection('groups')
             .doc(groupID)
-            .update({ taskOrder: firebase.firestore.FieldValue.arrayUnion({ taskName, desc, id: ID }) });
+            .update({ taskOrder: firebase.firestore.FieldValue.arrayUnion({ id: ID }) });
+        await db
+            .collection('projects')
+            .doc(projectID)
+            .collection('groups')
+            .doc(groupID)
+            .collection('tasks')
+            .doc(ID)
+            .set({ taskName, desc, id: ID });
         action.resetForm();
     } catch (err) {
         action.setErrors({ taskName: 'server error' });

@@ -20,6 +20,12 @@ export const setActiveProject = (obj: any) => {
         payload: obj,
     };
 };
+export const setGroupsOrder = (obj: { id: string }[]) => {
+    return {
+        type: ActionTypes.SET_GROUPS_ORDER,
+        payload: obj,
+    };
+};
 
 export const setSidebarOpen = (props?: any) => {
     return {

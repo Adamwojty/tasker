@@ -1,57 +1,41 @@
-import React, { useCallback, useState } from 'react';
-import update from 'immutability-helper';
+import React from 'react';
 import styled from 'styled-components';
 import { Colors, FontSize, FontWeight } from '../../../assets/const';
 import { ItemTypes } from '../ItemTypes';
-import { ICol, ITask } from '../models';
-import DraggableTask from '../Task/DraggableTask';
+import { ICol } from '../models';
 import { useDrop } from 'react-dnd';
+import { renderTask } from '../actions/renderTask';
+import { useGroupsData } from '../../common/hooks/useGroupsData';
+import { useTaskActions } from '../hooks/useTaskActions';
+import Spinner from '../../common/Spinner';
 
-const Column: React.FC<ICol> = ({ text, isDragging, tasks }) => {
-    const [taskOrder, setTaskOrder] = useState<ITask[]>(tasks);
-
-    const moveTask = useCallback(
-        (id: string, atIndex: number) => {
-            const { item, index } = findTask(id);
-            setTaskOrder(
-                update(taskOrder, {
-                    $splice: [
-                        [index, 1],
-                        [atIndex, 0, item],
-                    ],
-                }),
-            );
-        },
-        [taskOrder],
-    );
-    const findTask = useCallback(
-        (id: string) => {
-            const item = taskOrder.filter((c) => `${c.id}` === id)[0];
-            const index = taskOrder.indexOf(item);
-            return {
-                item,
-                index,
-            };
-        },
-        [taskOrder],
-    );
-    const renderTask = (task: ITask, findTask: any, moveTask: any) => {
-        return <DraggableTask {...task} key={task.id} moveTask={moveTask} findTask={findTask} />;
-    };
-
+const Column: React.FC<ICol> = ({ isDragging, colId, groupId }) => {
+    const { group } = useGroupsData(groupId);
+    const { findTask, moveTask } = useTaskActions();
     const [, drop] = useDrop({ accept: ItemTypes.ITEM });
+
     return (
         <>
-            <Title isDragging={isDragging}>{text}</Title>
-            <Col ref={drop}>{taskOrder && taskOrder.map((task: ITask) => renderTask(task, findTask, moveTask))}</Col>
+            <Title isDragging={isDragging}>{group?.groupName}</Title>
+            <Col ref={drop}>
+                {group?.taskOrder.length ? (
+                    group.taskOrder.map((task: { id: string }) => renderTask(task, findTask, moveTask, colId, groupId))
+                ) : (
+                    <Spinner />
+                )}
+            </Col>
         </>
     );
 };
 const Col = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border-radius: 5px;
     width: 250px;
     min-height: 600px;
     background-color: ${Colors.QUINARY};
+    padding: 5px;
 `;
 const Title = styled.div<{ isDragging: boolean }>`
     border-top-left-radius: 20px;
@@ -65,4 +49,5 @@ const Title = styled.div<{ isDragging: boolean }>`
     padding-top: 10px;
     height: 80px;
 `;
+
 export default Column;

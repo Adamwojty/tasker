@@ -1,17 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Colors, FontSize } from '../../../assets/const';
+import { useTasksData } from '../../common/hooks/useTasksData';
 
 interface ITask {
-    title: string;
-    desc: string;
+    id: string;
+    groupID: string;
 }
 
-const Task: React.FC<ITask> = ({ title, desc }) => {
+const Task: React.FC<ITask> = ({ id, groupID }) => {
+    const { data } = useTasksData(id, groupID);
     return (
         <Wrapper>
-            <Title>{title}</Title>
-            <p>{desc}</p>
+            <Title>{data?.taskName}</Title>
+            <p>{data?.desc}</p>
         </Wrapper>
     );
 };

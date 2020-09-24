@@ -1,39 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDrag, useDrop } from 'react-dnd';
-import { ItemTypes } from '../ItemTypes';
-import { IDragColumn, IDragCol } from '../models';
+import { IDragColumn } from '../models';
 import Column from './Column';
+import { useDragCol } from '../hooks/useDragCol';
 
-const DraggableColumn: React.FC<IDragColumn> = ({ id, text, moveCol, findCol, tasks }) => {
-    const originalIndex = findCol(id).index;
-    const [{ isDragging }, drag] = useDrag({
-        item: { type: ItemTypes.COLUMN, id, originalIndex },
-        collect: (monitor) => ({
-            isDragging: monitor.isDragging(),
-        }),
-        end: (dropResult, monitor) => {
-            const { id: droppedId, originalIndex } = monitor.getItem();
-            const didDrop = monitor.didDrop();
-            if (!didDrop) {
-                moveCol(droppedId, originalIndex, !didDrop);
-            }
-        },
-    });
-
-    const [, drop] = useDrop({
-        accept: ItemTypes.COLUMN,
-        canDrop: () => false,
-        hover({ id: draggedId }: IDragCol) {
-            if (draggedId !== id) {
-                const { index: overIndex } = findCol(id);
-                moveCol(draggedId, overIndex);
-            }
-        },
-    });
+const DraggableColumn: React.FC<IDragColumn> = ({ id, moveCol, findCol }) => {
+    const { drop, drag, isDragging, originalIndex } = useDragCol(findCol, moveCol, id);
     return (
         <Wrapper ref={(node) => drag(drop(node))}>
-            <Column isDragging={isDragging} text={text} tasks={tasks} />
+            <Column isDragging={isDragging} colId={originalIndex} groupId={id} />
         </Wrapper>
     );
 };

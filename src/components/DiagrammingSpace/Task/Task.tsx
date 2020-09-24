@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Colors, FontSize } from '../../../assets/const';
+import { FontSize } from '../../../assets/const';
 import { ITask } from '../models';
 
-const Task: React.FC<ITask> = ({ desc, taskName }) => {
+const Task: React.FC<ITask> = ({ taskName, desc }) => {
     return (
         <>
             <Title>{taskName}</Title>

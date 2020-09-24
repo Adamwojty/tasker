@@ -8,8 +8,8 @@ interface ITask {
     desc: string;
 }
 
-export const useTasksData = (id: string) => {
-    const [data, setData] = useState<ITask[]>();
+export const useTasksData = (taskID: string, groupID: string) => {
+    const [data, setData] = useState<any>();
     const { activeProject } = useContext(store);
 
     const getData = useCallback(async () => {
@@ -17,14 +17,11 @@ export const useTasksData = (id: string) => {
             db.collection('projects')
                 .doc(activeProject?.id)
                 .collection('groups')
-                .doc(id)
+                .doc(groupID)
                 .collection('tasks')
-                .onSnapshot((querySnapshot) => {
-                    const tasks: any[] = [];
-                    querySnapshot.forEach((doc) => {
-                        tasks.push(doc.data());
-                    });
-                    setData(tasks);
+                .doc(taskID)
+                .onSnapshot((snapshot) => {
+                    setData(snapshot.data());
                 });
         } catch (err) {
             console.error(err);
@@ -33,9 +30,15 @@ export const useTasksData = (id: string) => {
 
     useEffect(() => {
         getData();
+
         return () => {
             const unsubscribe = () => {
-                db.collection('projects').doc(activeProject?.id).collection('groups').doc(id).collection('tasks');
+                db.collection('projects')
+                    .doc(activeProject?.id)
+                    .collection('groups')
+                    .doc(groupID)
+                    .collection('tasks')
+                    .doc(taskID);
             };
 
             unsubscribe();

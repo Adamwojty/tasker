@@ -1,63 +1,18 @@
-import React, { useCallback, useContext, useState, useEffect } from 'react';
-import update from 'immutability-helper';
+import React from 'react';
 import { useDrop } from 'react-dnd';
 import styled from 'styled-components';
 import { ItemTypes } from './ItemTypes';
-import { store } from '../../config/store';
 import { renderColumn } from './actions/renderColumn';
-import { IGroups, ITask } from './models';
-import { updateGroups } from './actions/updateGroups';
+import { useDiagramActions } from './hooks/useDiagramActions';
 
 const DiagramingSpace: React.FC = () => {
-    const { activeProject } = useContext(store);
-    const [columns, setColumns] = useState<IGroups[]>([]);
-
-    const moveCol = useCallback(
-        (id: string, atIndex: number, didDrop?: boolean) => {
-            const { column, index } = findCol(id);
-
-            const newColOrder = update(columns, {
-                $splice: [
-                    [index, 1],
-                    [atIndex, 0, column],
-                ],
-            });
-            setColumns(newColOrder);
-            if (!didDrop) {
-                return updateGroups(newColOrder, activeProject?.id);
-            }
-        },
-        [columns],
-    );
-
-    const findCol = useCallback(
-        (id: string) => {
-            const column = columns.filter((c) => `${c.id}` === id)[0];
-            const index = columns.indexOf(column);
-            return {
-                column,
-                index,
-            };
-        },
-        [columns],
-    );
-
-    const [, drop] = useDrop({
-        accept: ItemTypes.COLUMN,
-    });
-
-    useEffect(() => {
-        if (activeProject && !columns.length) {
-            setColumns(activeProject.groupsOrder);
-        }
-    }, [activeProject]);
+    const { moveCol, findCol, groupsOrder } = useDiagramActions();
+    const [, drop] = useDrop({ accept: ItemTypes.COLUMN });
 
     return (
         <Wrapper>
             <DraggableSpace ref={drop}>
-                {columns.map((col: { id: string; groupName: string; taskOrder: ITask[] }) =>
-                    renderColumn(col, findCol, moveCol),
-                )}
+                {groupsOrder.map((col: { id: string }) => renderColumn(col.id, findCol, moveCol))}
             </DraggableSpace>
         </Wrapper>
     );

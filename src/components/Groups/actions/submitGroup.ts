@@ -18,11 +18,16 @@ export const submitGroup = async ({ values, action, projectID }: IGroup) => {
     try {
         const { groupName } = values;
         const ID: string = randomID();
-        await db.collection('projects').doc(projectID).collection('groups').doc(ID).set({ groupName, id: ID });
         await db
             .collection('projects')
             .doc(projectID)
-            .update({ groupsOrder: firebase.firestore.FieldValue.arrayUnion({ groupName, id: ID }) });
+            .collection('groups')
+            .doc(ID)
+            .set({ groupName, id: ID, taskOrder: [] });
+        await db
+            .collection('projects')
+            .doc(projectID)
+            .update({ groupsOrder: firebase.firestore.FieldValue.arrayUnion({ id: ID }) });
         action.resetForm();
     } catch (err) {
         action.setErrors({ groupName: 'server error' });
