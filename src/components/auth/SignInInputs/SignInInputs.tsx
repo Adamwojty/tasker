@@ -33,7 +33,7 @@ const SignInInputs: React.FC<ISignIpInputs> = ({ errors }) => {
                 error={password}
                 value={password}
             />
-            <SubmitButton text="sign in" />
+            <SubmitButton text="sign in" secondary />
         </FormWrapper>
     );
 };

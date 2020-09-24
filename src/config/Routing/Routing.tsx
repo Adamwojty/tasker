@@ -13,11 +13,12 @@ const Routing: React.FC = () => (
     <BrowserRouter>
         <Switch>
             <Route exact path={Routes.MAIN} component={MainView} />
+            <Route path={Routes.SIGN_IN} component={SignInView} />
+            <Route path={Routes.SIGN_UP} component={SignUpView} />
+
             <AppRouteLayout path={Routes.TABLE} component={DiagramingSpace} />
             <AppRouteLayout path={Routes.NEW_PROJECT} component={Project} />
             <AppRouteLayout path={Routes.GROUPS} component={Groups} />
-            <Route path={Routes.SIGN_IN} component={SignInView} />
-            <Route path={Routes.SIGN_UP} component={SignUpView} />
         </Switch>
     </BrowserRouter>
 );

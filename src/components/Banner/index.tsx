@@ -8,6 +8,7 @@ import SettingsIcon from '../../assets/img/icons/settings.svg';
 const Banner: React.FC = () => {
     const history = useHistory();
     const handleLogout = useCallback(() => {
+        localStorage.removeItem('uid');
         return history.push(Routes.MAIN);
     }, []);
     return (

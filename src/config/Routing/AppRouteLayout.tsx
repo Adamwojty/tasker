@@ -1,8 +1,9 @@
 import React, { ElementType, useContext } from 'react';
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import Project from '../../components/Project';
 import AppLayout from '../../Layout/AppLayout';
 import { store } from '../store';
+import { Routes } from './Routes';
 
 interface IAppRouteLayout {
     component: ElementType;
@@ -11,11 +12,14 @@ interface IAppRouteLayout {
 
 const AppRouteLayout: React.FC<IAppRouteLayout> = ({ component: Component, ...rest }: IAppRouteLayout) => {
     const { activeProject } = useContext(store);
-    return (
+    const uid = localStorage.getItem('uid');
+    return uid ? (
         <Route
             {...rest}
             render={(props) => <AppLayout>{activeProject ? <Component {...props} /> : <Project />}</AppLayout>}
         />
+    ) : (
+        <Redirect to={Routes.MAIN} />
     );
 };
 export default AppRouteLayout;

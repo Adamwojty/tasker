@@ -28,7 +28,7 @@ const SignUpView: React.FC = () => {
                 >
                     {(props: { errors: string }) => <SignUpInputs {...props} />}
                 </Formik>
-                <NavLinks register={true} />
+                <NavLinks register />
             </ContentWrapper>
         </Wrapper>
     );

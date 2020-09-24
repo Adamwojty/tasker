@@ -33,7 +33,7 @@ const SignUpInputs: React.FC<ISignUpInputs> = ({ errors }) => {
                 error={password}
                 value={password}
             />
-            <SubmitButton text="create new account" />
+            <SubmitButton text="create new account" secondary={true} />
         </FormWrapper>
     );
 };

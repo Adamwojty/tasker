@@ -22,12 +22,10 @@ export const signInSubmit = async ({ values, action, dispatch, history }: ISignI
         const uid = response.user?.uid;
         const userResponse = await db.collection('users').doc(uid).get();
         const userProfile = userResponse.data();
-        console.log(userProfile);
+        localStorage.setItem('uid', userProfile?.uid);
         dispatch(setUser(userProfile));
         history.push(Routes.NEW_PROJECT);
     } catch (err) {
-        const errorMessage = err.message;
-        console.log(errorMessage);
         action.setErrors({ email: 'account not found' });
     }
 };
