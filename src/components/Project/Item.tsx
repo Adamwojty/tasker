@@ -26,6 +26,8 @@ const Wrapper = styled.div`
     background-color: ${Colors.QUINARY};
     color: ${Colors.TERITIARY};
     transition: 0.2s ease-in-out;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    margin-bottom: 20px;
     :hover {
         background-color: ${Colors.SECONDARY};
         color: ${Colors.MAIN};

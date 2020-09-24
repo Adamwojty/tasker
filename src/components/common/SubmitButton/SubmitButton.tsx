@@ -12,5 +12,6 @@ const Button = styled.button`
     border-radius: 5px;
     background-color: ${Colors.QUINARY};
     color: ${Colors.TERITIARY};
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
 export default SubmitButton;

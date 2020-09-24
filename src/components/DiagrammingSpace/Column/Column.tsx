@@ -36,6 +36,7 @@ const Col = styled.div`
     min-height: 600px;
     background-color: ${Colors.QUINARY};
     padding: 5px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
 const Title = styled.div<{ isDragging: boolean }>`
     border-top-left-radius: 20px;
@@ -48,6 +49,7 @@ const Title = styled.div<{ isDragging: boolean }>`
     margin-bottom: 10px;
     padding-top: 10px;
     height: 80px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
 
 export default Column;

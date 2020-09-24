@@ -19,9 +19,10 @@ const Task: React.FC<ITask> = ({ id, groupID }) => {
 };
 const Wrapper = styled.div`
     background-color: ${Colors.QUINARY};
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     border-radius: 5px;
     padding: 5px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
 const Title = styled.h4`
     font-size: ${FontSize.TEXT_MOBILE};
