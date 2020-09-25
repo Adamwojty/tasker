@@ -42,4 +42,7 @@ export interface IDraggedTask {
     id: string;
     colId: number;
     type: string;
+    originalIndex: number;
+    groupId: string;
+    data: { id: string; desc: string; taskName: string };
 }

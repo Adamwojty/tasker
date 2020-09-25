@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Colors, FontSize, FontWeight } from '../../../assets/const';
-import { ItemTypes } from '../ItemTypes';
 import { ICol } from '../models';
-import { useDrop } from 'react-dnd';
 import { renderTask } from '../actions/renderTask';
 import { useGroupsData } from '../../common/hooks/useGroupsData';
 import { useTaskActions } from '../hooks/useTaskActions';
@@ -11,14 +9,13 @@ import Spinner from '../../common/Spinner';
 
 const Column: React.FC<ICol> = ({ isDragging, colId, groupId }) => {
     const { group } = useGroupsData(groupId);
-    const { findTask, moveTask } = useTaskActions();
-    const [, drop] = useDrop({ accept: ItemTypes.ITEM });
+    const { findTask, moveTask, drop } = useTaskActions(colId, groupId);
 
     return (
         <>
             <Title isDragging={isDragging}>{group?.groupName}</Title>
             <Col ref={drop}>
-                {group?.taskOrder.length ? (
+                {group ? (
                     group.taskOrder.map((task: { id: string }) => renderTask(task, findTask, moveTask, colId, groupId))
                 ) : (
                     <Spinner />

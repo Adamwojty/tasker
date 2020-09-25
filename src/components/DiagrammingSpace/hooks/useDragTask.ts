@@ -14,10 +14,11 @@ export const useDragTask = (
     colId: number,
     id: string,
     groupId: string,
+    data: { id: string; desc: string; taskName: string },
 ) => {
     const originalIndex = findTask(id, groupId).index;
 
-    const [, drag] = useDrag({ item: { type: ItemTypes.ITEM, id, originalIndex, colId } });
+    const [, drag] = useDrag({ item: { type: ItemTypes.ITEM, id, originalIndex, colId, groupId, data } });
 
     const [, drop] = useDrop({
         accept: ItemTypes.ITEM,

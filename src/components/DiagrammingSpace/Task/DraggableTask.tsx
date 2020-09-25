@@ -7,8 +7,9 @@ import { IDragTask } from '../models';
 import Task from './Task';
 
 const DraggableTask: React.FC<IDragTask> = ({ id, moveTask, findTask, colId, groupId }) => {
-    const { drop, drag } = useDragTask(findTask, moveTask, colId, id, groupId);
     const { data } = useTasksData(id, groupId);
+    const { drop, drag } = useDragTask(findTask, moveTask, colId, id, groupId, data);
+
     return (
         <Wrapper ref={(node) => drag(drop(node))}>
             <Task taskName={data?.taskName} desc={data?.desc} />
