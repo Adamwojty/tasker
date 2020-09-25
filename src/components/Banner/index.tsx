@@ -1,24 +1,25 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Colors, FontWeight, FontSize } from '../../assets/const';
 import { Routes } from '../../config/Routing/Routes';
 import ExitIcon from '../../assets/img/icons/exit.svg';
 import SettingsIcon from '../../assets/img/icons/settings.svg';
+import LogoutModal from './LogoutModal';
+
 const Banner: React.FC = () => {
-    const history = useHistory();
-    const handleLogout = useCallback(() => {
-        localStorage.removeItem('uid');
-        return history.push(Routes.MAIN);
-    }, []);
+    const [modalOpen, setModalOpen] = useState<boolean>(false);
+    const handleModal = useCallback(() => {
+        return setModalOpen(!modalOpen);
+    }, [modalOpen]);
     return (
         <Wrapper>
             <Logo to={Routes.TABLE}>tasker</Logo>
-
             <OptionsWrapper>
                 <NewProject to={Routes.NEW_PROJECT}>Projects</NewProject>
                 <Settings url={SettingsIcon} />
-                <Exit url={ExitIcon} onClick={handleLogout} />
+                <Exit url={ExitIcon} onClick={handleModal} type="button" />
+                <LogoutModal modalOpen={modalOpen} handleModal={handleModal} />
             </OptionsWrapper>
         </Wrapper>
     );
@@ -54,7 +55,7 @@ const OptionsWrapper = styled.div`
     width: 200px;
     justify-content: space-between;
 `;
-const Exit = styled.a<{ url: string }>`
+const Exit = styled.button<{ url: string }>`
     cursor: pointer;
     background-image: ${({ url }) => `url(${url})`};
     background-position: center;
