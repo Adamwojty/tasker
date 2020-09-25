@@ -39,6 +39,9 @@ export const useDiagramActions = () => {
         if (groupsOrder && !columns.length) {
             setColumns(groupsOrder);
         }
+        return () => {
+            setColumns(groupsOrder);
+        };
     }, [groupsOrder]);
     return { findCol, moveCol, groupsOrder };
 };
