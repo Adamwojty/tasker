@@ -8,7 +8,6 @@ export const useGroupsData = (id: string) => {
 
     useEffect(() => {
         const unsubscribe = () => {
-            console.log('123');
             db.collection('projects')
                 .doc(activeProject?.id)
                 .collection('groups')
