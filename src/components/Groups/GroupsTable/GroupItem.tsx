@@ -20,11 +20,7 @@ const GroupItem: React.FC<IGroupItemProps> = ({ open, id }) => {
         <>
             <Title>{group?.groupName}</Title>
             <ContentWrapper open={open}>
-                {group ? (
-                    group.taskOrder.map((task: ITask) => <Task key={task.id} id={task.id} groupID={id} />)
-                ) : (
-                    <Spinner />
-                )}
+                {group ? group.taskOrder.map((task: ITask) => <Task key={task.id} id={task.id} />) : <Spinner />}
             </ContentWrapper>
         </>
     );

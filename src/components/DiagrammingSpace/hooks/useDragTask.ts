@@ -1,16 +1,10 @@
 import { useDrag, useDrop } from 'react-dnd';
 import { ItemTypes } from '../ItemTypes';
-import { IDraggedTask } from '../models';
+import { IDraggedTask, FindTaskType, MoveTaskType } from '../models';
 
 export const useDragTask = (
-    findTask: (
-        id: string,
-        colId: string,
-    ) => {
-        item: string;
-        index: number;
-    },
-    moveTask: (id: string, to: number, colId: string) => void,
+    findTask: FindTaskType,
+    moveTask: MoveTaskType,
     colId: number,
     id: string,
     groupId: string,

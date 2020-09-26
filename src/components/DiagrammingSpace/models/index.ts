@@ -1,13 +1,8 @@
 //COLUMNS
 export interface IDragColumn {
     id: string;
-    moveCol: (id: string, to: number, didDrop?: boolean) => void;
-    findCol: (
-        id: string,
-    ) => {
-        column: { id: string };
-        index: number;
-    };
+    moveCol: MoveColType;
+    findCol: FindColType;
 }
 export interface IDragCol {
     type: string;
@@ -21,14 +16,8 @@ export interface ICol {
 }
 // TASKS
 export interface IDragTask {
-    moveTask: (id: string, to: number, colId: string) => void;
-    findTask: (
-        id: string,
-        colId: string,
-    ) => {
-        item: string;
-        index: number;
-    };
+    moveTask: MoveTaskType;
+    findTask: FindTaskType;
     colId: number;
     id: string;
     groupId: string;
@@ -46,3 +35,7 @@ export interface IDraggedTask {
     groupId: string;
     data: { id: string; desc: string; taskName: string };
 }
+export type MoveColType = (id: string, to: number, didDrop?: boolean) => void;
+export type FindColType = (id: string) => { column: { id: string }; index: number };
+export type MoveTaskType = (id: string, to: number, colId: string) => void;
+export type FindTaskType = (id: string, colId: string) => { item: string; index: number };

@@ -5,11 +5,10 @@ import { useTasksData } from '../../common/hooks/useTasksData';
 
 interface ITask {
     id: string;
-    groupID: string;
 }
 
-const Task: React.FC<ITask> = ({ id, groupID }) => {
-    const { data } = useTasksData(id, groupID);
+const Task: React.FC<ITask> = ({ id }) => {
+    const { data } = useTasksData(id);
     return (
         <Wrapper>
             <Title>{data?.taskName}</Title>

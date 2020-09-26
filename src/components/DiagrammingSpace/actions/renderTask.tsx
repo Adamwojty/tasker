@@ -1,16 +1,11 @@
 import React from 'react';
+import { FindTaskType, MoveTaskType } from '../models';
 import DraggableTask from '../Task/DraggableTask';
 
 export const renderTask = (
     task: { id: string },
-    findTask: (
-        id: string,
-        colId: string,
-    ) => {
-        item: any;
-        index: number;
-    },
-    moveTask: (id: string, to: number, colId: string) => void,
+    findTask: FindTaskType,
+    moveTask: MoveTaskType,
     colId: number,
     groupId: string,
 ) => {

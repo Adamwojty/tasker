@@ -70,6 +70,9 @@ export const useTaskActions = (colId: number, groupId: string) => {
         if (data) {
             setTasks(data);
         }
+        return () => {
+            setTasks(data);
+        };
     }, [data]);
 
     return { findTask, moveTask, drop };
