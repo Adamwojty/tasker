@@ -38,4 +38,4 @@ export interface IDraggedTask {
 export type MoveColType = (id: string, to: number, didDrop?: boolean) => void;
 export type FindColType = (id: string) => { column: { id: string }; index: number };
 export type MoveTaskType = (id: string, to: number, colId: string) => void;
-export type FindTaskType = (id: string, colId: string) => { item: string; index: number };
+export type FindTaskType = (id: string, colId: string) => { item: string; index: number; taskOrder: { id: string }[] };

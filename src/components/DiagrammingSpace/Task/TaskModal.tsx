@@ -24,27 +24,40 @@ interface ITaskModal {
     modalOpen: boolean;
     handleModal: () => void;
     data: { taskName?: string; desc?: string };
+    handleTaskDelete: () => void;
 }
 
 // eslint-disable-next-line react/display-name
-const TaskModal: React.FC<ITaskModal> = memo(({ modalOpen, handleModal, data }) => {
+const TaskModal: React.FC<ITaskModal> = memo(({ modalOpen, handleModal, data, handleTaskDelete }) => {
     return (
         <Modal isOpen={modalOpen} onRequestClose={handleModal} style={customStyles} contentLabel="Task Modal">
             <ContentWrapper>
-                <Title>{data?.taskName}</Title>
-                <SubTitle>Task description:</SubTitle>
-                <Text>{data?.desc}</Text>
+                <Content>
+                    <Title>{data?.taskName}</Title>
+                    <SubTitle>Task description:</SubTitle>
+                    <Text>{data?.desc}</Text>
+                </Content>
+                <Button type="button" onClick={handleTaskDelete}>
+                    delete task
+                </Button>
             </ContentWrapper>
             <Close onClick={handleModal}>X</Close>
         </Modal>
     );
 });
-
 const ContentWrapper = styled.div`
-    margin-top: 25px;
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+`;
+
+const Content = styled.div`
     display: flex;
     flex-direction: column;
     color: ${Colors.TERITIARY};
+    overflow-y: auto;
 `;
 const Title = styled.h3`
     font-size: ${FontSize.LOGO_MOBILE};
@@ -73,9 +86,17 @@ const Close = styled.button`
     color: ${Colors.MAIN};
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     border-radius: 5px;
+`;
+const Button = styled.button`
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: ${Colors.SECONDARY};
+    color: ${Colors.MAIN};
+    width: 100px;
+    transition: 0.3s ease-in-out;
     :hover {
-        color: ${Colors.MAIN};
-        background-color: ${Colors.SECONDARY};
+        color: ${Colors.TERITIARY};
+        background-color: ${Colors.QUINARY};
     }
 `;
 export default TaskModal;
