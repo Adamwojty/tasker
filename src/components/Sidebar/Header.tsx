@@ -18,7 +18,7 @@ const Header: React.FC = () => {
     );
 };
 const Wrapper = styled.header`
-    margin-left: 10px;
+    margin: 0 10px;
     padding: 60px 0 50px;
     align-items: center;
     display: flex;

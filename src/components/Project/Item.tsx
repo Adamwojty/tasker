@@ -6,17 +6,18 @@ interface IItem {
     handleActiveProject: () => void;
     projectName: string;
     desc: string;
+    active: boolean;
 }
 
-const Item: React.FC<IItem> = ({ handleActiveProject, projectName, desc }) => {
+const Item: React.FC<IItem> = ({ handleActiveProject, projectName, desc, active }) => {
     return (
-        <Wrapper onClick={handleActiveProject}>
+        <Wrapper onClick={handleActiveProject} active={active}>
             <Title>{projectName}</Title>
             <Desc>{desc}</Desc>
         </Wrapper>
     );
 };
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ active: boolean }>`
     cursor: pointer;
     display: block;
     width: 80%;
@@ -28,9 +29,11 @@ const Wrapper = styled.div`
     transition: 0.2s ease-in-out;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     margin-bottom: 20px;
+    border: ${({ active }) => (active ? `2px solid ${Colors.SECONDARY}` : 'none')};
     :hover {
         background-color: ${Colors.SECONDARY};
         color: ${Colors.MAIN};
+        border: ${({ active }) => (active ? `2px solid ${Colors.TERITIARY}` : 'none')};
     }
 `;
 const Title = styled.h3`

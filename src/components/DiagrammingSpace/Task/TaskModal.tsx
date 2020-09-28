@@ -1,9 +1,11 @@
-import React, { memo, useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import styled from 'styled-components';
 import Modal from 'react-modal';
 import { Colors, FontSize } from '../../../assets/const';
 import { handleTaskDelete } from '../actions/handleTaskDelete';
 import { ITaskModal } from '../models';
+import { handleFinishTask } from '../actions/handleFinishTask';
+import { store } from '../../../config/store';
 
 const customStyles = {
     overlay: {
@@ -23,9 +25,13 @@ const customStyles = {
 };
 
 // eslint-disable-next-line react/display-name
-const TaskModal: React.FC<ITaskModal> = memo(({ modalOpen, handleModal, data, groupID, id, group }) => {
+const TaskModal: React.FC<ITaskModal> = ({ modalOpen, handleModal, data, groupID, id, group }) => {
+    const { activeProject } = useContext(store);
     const deleteTask = useCallback(() => {
         return handleTaskDelete(id, groupID, group);
+    }, []);
+    const markAsFinished = useCallback(() => {
+        return handleFinishTask(id, groupID, group, activeProject?.id);
     }, []);
     return (
         <Modal isOpen={modalOpen} onRequestClose={handleModal} style={customStyles} contentLabel="Task Modal">
@@ -35,14 +41,19 @@ const TaskModal: React.FC<ITaskModal> = memo(({ modalOpen, handleModal, data, gr
                     <SubTitle>Task description:</SubTitle>
                     <Text>{data?.desc}</Text>
                 </Content>
-                <Button type="button" onClick={deleteTask}>
-                    delete task
-                </Button>
+                <ButtonsWrapper>
+                    <Button type="button" onClick={markAsFinished}>
+                        mark as finished
+                    </Button>
+                    <Button type="button" onClick={deleteTask}>
+                        delete task
+                    </Button>
+                </ButtonsWrapper>
             </ContentWrapper>
             <Close onClick={handleModal}>X</Close>
         </Modal>
     );
-});
+};
 const ContentWrapper = styled.div`
     padding-top: 25px;
     display: flex;
@@ -85,13 +96,17 @@ const Close = styled.button`
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     border-radius: 5px;
 `;
+const ButtonsWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
 const Button = styled.button`
     padding: 10px 15px;
     border-radius: 5px;
     background-color: ${Colors.SECONDARY};
     color: ${Colors.MAIN};
-    width: 100px;
     transition: 0.3s ease-in-out;
+    margin-top: 10px;
     :hover {
         color: ${Colors.TERITIARY};
         background-color: ${Colors.QUINARY};

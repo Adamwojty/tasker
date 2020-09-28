@@ -14,13 +14,14 @@ interface IProject {
 
 const ProjectItem: React.FC<IProject> = ({ project }) => {
     const { projectName, desc, groupsOrder } = project;
-    const { dispatch } = useContext(store);
+    const { dispatch, activeProject } = useContext(store);
     const handleActiveProject = useCallback(() => {
         dispatch(setGroupsOrder(groupsOrder));
         return dispatch(setActiveProject(project));
     }, []);
+    const active = activeProject === project;
 
-    return <Item handleActiveProject={handleActiveProject} projectName={projectName} desc={desc} />;
+    return <Item handleActiveProject={handleActiveProject} projectName={projectName} desc={desc} active={active} />;
 };
 
 export default ProjectItem;

@@ -8,6 +8,7 @@ import AppRouteLayout from './AppRouteLayout';
 import DiagramingSpace from '../../components/DiagrammingSpace';
 import Project from '../../components/Project';
 import Groups from '../../components/Groups';
+import FinishedTasksView from '../../views/FinishedTasksView';
 
 const Routing: React.FC = () => (
     <BrowserRouter>
@@ -18,6 +19,7 @@ const Routing: React.FC = () => (
 
             <AppRouteLayout path={Routes.TABLE} component={DiagramingSpace} />
             <AppRouteLayout path={Routes.NEW_PROJECT} component={Project} />
+            <AppRouteLayout path={Routes.TASKS_FINISHED} component={FinishedTasksView} />
             <AppRouteLayout path={Routes.GROUPS} component={Groups} />
         </Switch>
     </BrowserRouter>

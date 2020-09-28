@@ -10,19 +10,16 @@ interface IValues {
 }
 interface ITask {
     values: IValues;
-    projectID?: string;
     action: {
         setErrors: (fields: { [field: string]: string }) => void;
         resetForm: (nextInitialState?: FormikState<IValues>) => void;
     };
 }
-export const submitTask = async ({ values, action, projectID }: ITask) => {
+export const submitTask = async ({ values, action }: ITask) => {
     try {
         const { taskName, desc, groupID } = values;
         const ID: string = randomID();
         await db
-            .collection('projects')
-            .doc(projectID)
             .collection('groups')
             .doc(groupID)
             .update({ taskOrder: firebase.firestore.FieldValue.arrayUnion({ id: ID }) });

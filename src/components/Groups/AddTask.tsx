@@ -1,11 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Formik } from 'formik';
-
 import styled from 'styled-components';
 import { Colors, FontSize } from '../../assets/const';
 import TaskInputs from './TaskInputs';
 import { taskValidationSchema } from './actions/validationSchema';
-import { store } from '../../config/store';
 import { submitTask } from './actions/submitTask';
 
 interface IInitialValues {
@@ -16,7 +14,7 @@ interface IInitialValues {
 
 const AddTask: React.FC = () => {
     const initialValues: IInitialValues = { taskName: '', desc: '', groupID: '' };
-    const { activeProject } = useContext(store);
+
     return (
         <>
             <Title>Create new task:</Title>
@@ -25,7 +23,7 @@ const AddTask: React.FC = () => {
                 validateOnChange={false}
                 validateOnBlur={false}
                 validationSchema={taskValidationSchema}
-                onSubmit={(values, action) => submitTask({ values, action, projectID: activeProject?.id })}
+                onSubmit={(values, action) => submitTask({ values, action })}
             >
                 {(props: {
                     errors: IInitialValues;
