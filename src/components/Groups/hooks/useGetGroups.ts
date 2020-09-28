@@ -2,41 +2,29 @@ import { useContext, useEffect, useState } from 'react';
 import { db } from '../../../config/firebase/firebaseInit';
 import { store } from '../../../config/store';
 
-export const useGetGroups = () => {
-    const [data, setData] = useState<any>();
-    const { activeProject } = useContext(store);
+interface IGroups {
+    groupName: string;
+    id: string;
+    taskOrder: { id: string }[];
+}
 
-    const getData = async () => {
-        try {
-            db.collection('projects')
-                .doc(activeProject?.id)
-                .collection('groups')
-                .onSnapshot((snapshot) => {
-                    const groups: any[] = [];
-                    snapshot.forEach((doc) => {
-                        groups.push(doc.data());
-                    });
-                    setData(groups);
-                });
-        } catch (err) {
-            console.error(err);
-        }
-    };
+export const useGetGroups = () => {
+    const [groups, setGroups] = useState<IGroups[]>();
+    const { groupsOrder } = useContext(store);
     useEffect(() => {
-        getData();
+        const unsubscribe = () => {
+            const allGroups: any[] = [];
+            groupsOrder.map((g: { id: string }) => {
+                db.collection('groups')
+                    .doc(g.id)
+                    .onSnapshot((snapshot) => allGroups.push(snapshot.data()));
+            });
+            setGroups(allGroups);
+        };
+        unsubscribe();
         return () => {
-            const unsubscribe = db
-                .collection('projects')
-                .doc(activeProject?.id)
-                .collection('groups')
-                .onSnapshot((snapshot) => {
-                    const groups: any[] = [];
-                    snapshot.forEach((doc) => {
-                        groups.push(doc.data());
-                    });
-                });
             unsubscribe();
         };
     }, []);
-    return { data };
+    return { groups };
 };

@@ -1,25 +1,24 @@
 import { useDrag, useDrop } from 'react-dnd';
+import { useTasksData } from '../../common/hooks/useTasksData';
+import { findTask } from '../actions/findTask';
+import { moveTask } from '../actions/moveTask';
 import { ItemTypes } from '../ItemTypes';
-import { IDraggedTask, FindTaskType, MoveTaskType } from '../models';
+import { IDraggedTask, IGroup } from '../models';
 
-export const useDragTask = (
-    findTask: FindTaskType,
-    moveTask: MoveTaskType,
-    colId: number,
-    id: string,
-    groupId: string,
-    data: { id: string; desc: string; taskName: string },
-) => {
-    const originalIndex = findTask(id, groupId).index;
+export const useDragTask = (colID: number, id: string, groupID: string, group: IGroup) => {
+    const { data } = useTasksData(id);
+    const originalIndex = findTask(id, group).index;
 
-    const [, drag] = useDrag({ item: { type: ItemTypes.ITEM, id, originalIndex, colId, groupId, data } });
+    const [, drag] = useDrag({
+        item: { type: ItemTypes.ITEM, id, originalIndex, colID, groupID, taskID: data?.id, group },
+    });
 
     const [, drop] = useDrop({
         accept: ItemTypes.ITEM,
-        drop: ({ id: draggedId, colId: overColId }: IDraggedTask) => {
-            if (draggedId !== id && colId === overColId) {
-                const { index: overIndex } = findTask(id, groupId);
-                return moveTask(draggedId, overIndex, groupId);
+        drop: ({ id: draggedID, colID: overColID }: IDraggedTask) => {
+            if (draggedID !== id && colID === overColID) {
+                const { index: overIndex } = findTask(id, group);
+                return moveTask(draggedID, overIndex, findTask, group);
             }
             return undefined;
         },

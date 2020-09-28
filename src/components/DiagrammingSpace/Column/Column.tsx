@@ -2,21 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 import { Colors, FontSize, FontWeight } from '../../../assets/const';
 import { ICol } from '../models';
-import { renderTask } from '../actions/renderTask';
-import { useGroupsData } from '../../common/hooks/useGroupsData';
-import { useTaskActions } from '../hooks/useTaskActions';
+import { useTaskDrop } from '../hooks/useDropTask';
 import Spinner from '../../common/Spinner';
+import DraggableTask from '../Task/DraggableTask';
+import { useGroupData } from '../../common/hooks/useGroupData';
 
-const Column: React.FC<ICol> = ({ isDragging, colId, groupId }) => {
-    const { group } = useGroupsData(groupId);
-    const { findTask, moveTask, drop } = useTaskActions(colId, groupId);
-
+const Column: React.FC<ICol> = ({ isDragging, colID, groupID }) => {
+    const { group } = useGroupData(groupID);
+    const { drop } = useTaskDrop(colID, groupID);
     return (
         <>
             <Title isDragging={isDragging}>{group?.groupName}</Title>
             <Col ref={drop}>
                 {group ? (
-                    group.taskOrder.map((task: { id: string }) => renderTask(task, findTask, moveTask, colId, groupId))
+                    group.taskOrder.map((task: { id: string }) => (
+                        <DraggableTask key={task.id} id={task.id} colID={colID} groupID={groupID} group={group} />
+                    ))
                 ) : (
                     <Spinner />
                 )}

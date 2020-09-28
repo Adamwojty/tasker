@@ -4,26 +4,26 @@ import { Colors } from '../../../assets/const';
 import { useTasksData } from '../../common/hooks/useTasksData';
 import { useDragTask } from '../hooks/useDragTask';
 import { useModal } from '../hooks/useModal';
-import { useTaskDelete } from '../hooks/useTaskDelete';
 import { IDragTask } from '../models';
 import Task from './Task';
 import TaskModal from './TaskModal';
 
-const DraggableTask: React.FC<IDragTask> = ({ id, moveTask, findTask, colId, groupId }) => {
+const DraggableTask: React.FC<IDragTask> = ({ id, colID, groupID, group }) => {
+    const { drop, drag } = useDragTask(colID, id, groupID, group);
     const { data } = useTasksData(id);
-    const { drop, drag } = useDragTask(findTask, moveTask, colId, id, groupId, data);
-    const { handleTaskDelete } = useTaskDelete(id, groupId, findTask);
     const { modalOpen, handleModal } = useModal();
     return (
         <>
             <Wrapper ref={(node) => drag(drop(node))} onClick={handleModal}>
-                <Task taskName={data?.taskName} desc={data?.desc} />
+                {data && data ? <Task taskName={data.taskName} desc={data.desc} /> : null}
             </Wrapper>
             <TaskModal
                 modalOpen={modalOpen}
                 handleModal={handleModal}
                 data={data}
-                handleTaskDelete={handleTaskDelete}
+                id={id}
+                group={group}
+                groupID={groupID}
             />
         </>
     );

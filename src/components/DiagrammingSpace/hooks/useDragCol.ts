@@ -1,9 +1,14 @@
+import { useContext } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
+import { store } from '../../../config/store';
+import { findCol } from '../actions/findCol';
+import { moveCol } from '../actions/moveCol';
 import { ItemTypes } from '../ItemTypes';
-import { IDragCol, MoveColType, FindColType } from '../models';
+import { IDragCol } from '../models';
 
-export const useDragCol = (findCol: FindColType, moveCol: MoveColType, id: string) => {
-    const originalIndex = findCol(id).index;
+export const useDragCol = (id: string) => {
+    const { groupsOrder, activeProject, dispatch } = useContext(store);
+    const originalIndex = findCol(id, groupsOrder).index;
 
     const [{ isDragging }, drag] = useDrag({
         item: { type: ItemTypes.COLUMN, id, originalIndex },
@@ -14,7 +19,7 @@ export const useDragCol = (findCol: FindColType, moveCol: MoveColType, id: strin
             const { id: droppedId, originalIndex } = monitor.getItem();
             const didDrop = monitor.didDrop();
             if (!didDrop) {
-                moveCol(droppedId, originalIndex, !didDrop);
+                moveCol(droppedId, originalIndex, groupsOrder, dispatch, activeProject?.id, !didDrop);
             }
         },
     });
@@ -24,8 +29,8 @@ export const useDragCol = (findCol: FindColType, moveCol: MoveColType, id: strin
         canDrop: () => false,
         hover({ id: draggedId }: IDragCol) {
             if (draggedId !== id) {
-                const { index: overIndex } = findCol(id);
-                moveCol(draggedId, overIndex);
+                const { index: overIndex } = findCol(id, groupsOrder);
+                moveCol(draggedId, overIndex, groupsOrder, dispatch, activeProject?.id);
             }
         },
     });

@@ -1,8 +1,6 @@
 //COLUMNS
 export interface IDragColumn {
     id: string;
-    moveCol: MoveColType;
-    findCol: FindColType;
 }
 export interface IDragCol {
     type: string;
@@ -11,16 +9,20 @@ export interface IDragCol {
 }
 export interface ICol {
     isDragging: boolean;
-    colId: number;
-    groupId: string;
+    colID: number;
+    groupID: string;
+}
+export interface IGroup {
+    id: string;
+    groupName: string;
+    taskOrder: { id: string }[];
 }
 // TASKS
 export interface IDragTask {
-    moveTask: MoveTaskType;
-    findTask: FindTaskType;
-    colId: number;
+    colID: number;
     id: string;
-    groupId: string;
+    groupID: string;
+    group: IGroup;
 }
 export interface ITask {
     taskName?: string;
@@ -29,13 +31,20 @@ export interface ITask {
 
 export interface IDraggedTask {
     id: string;
-    colId: number;
+    colID: number;
     type: string;
     originalIndex: number;
-    groupId: string;
-    data: { id: string; desc: string; taskName: string };
+    groupID: string;
+    taskID?: string;
+    group: IGroup;
 }
-export type MoveColType = (id: string, to: number, didDrop?: boolean) => void;
-export type FindColType = (id: string) => { column: { id: string }; index: number };
-export type MoveTaskType = (id: string, to: number, colId: string) => void;
-export type FindTaskType = (id: string, colId: string) => { item: string; index: number; taskOrder: { id: string }[] };
+export interface ITaskModal {
+    modalOpen: boolean;
+    handleModal: () => void;
+    data: { taskName?: string; desc?: string };
+    group: IGroup;
+    id: string;
+    groupID: string;
+}
+
+export type FindTaskType = (id: string, group: IGroup) => { item: { id: string }; index: number };

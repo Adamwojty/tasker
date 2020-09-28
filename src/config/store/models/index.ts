@@ -22,11 +22,6 @@ interface IProject {
     projectName: string;
     desc: string;
 }
-interface ITask {
-    taskName: string;
-    desc: string;
-    id: string;
-}
 
 // Context
 export interface IInitialContext {

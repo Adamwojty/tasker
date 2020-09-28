@@ -2,16 +2,17 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Colors, FontSize } from '../../../assets/const';
 import GroupWrapper from './GroupWrapper';
-import { store } from '../../../config/store';
 import Spinner from '../../common/Spinner';
+import { store } from '../../../config/store';
 
 const GroupsTable: React.FC = () => {
-    const { activeProject } = useContext(store);
+    const { groupsOrder } = useContext(store);
+
     return (
         <Wrapper>
             <Title>Groups:</Title>
-            {activeProject ? (
-                activeProject.groupsOrder.map((group: { id: string }) => <GroupWrapper key={group.id} id={group.id} />)
+            {groupsOrder ? (
+                groupsOrder.map((group: { id: string }) => <GroupWrapper key={group.id} id={group.id} />)
             ) : (
                 <Spinner />
             )}

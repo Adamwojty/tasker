@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { IDragColumn } from '../models';
-import Column from './Column';
 import { useDragCol } from '../hooks/useDragCol';
+import Column from './Column';
 
-const DraggableColumn: React.FC<IDragColumn> = ({ id, moveCol, findCol }) => {
-    const { drop, drag, isDragging, originalIndex } = useDragCol(findCol, moveCol, id);
+const DraggableColumn: React.FC<IDragColumn> = ({ id }) => {
+    const { drop, drag, isDragging, originalIndex } = useDragCol(id);
+
     return (
         <Wrapper ref={(node) => drag(drop(node))}>
-            <Column isDragging={isDragging} colId={originalIndex} groupId={id} />
+            <Column colID={originalIndex} groupID={id} isDragging={isDragging} />
         </Wrapper>
     );
 };

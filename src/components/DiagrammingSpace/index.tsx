@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useDrop } from 'react-dnd';
 import styled from 'styled-components';
 import { ItemTypes } from './ItemTypes';
-import { renderColumn } from './actions/renderColumn';
-import { useDiagramActions } from './hooks/useDiagramActions';
+import DraggableColumn from './Column/DraggableColumn';
+import { store } from '../../config/store';
 
 const DiagramingSpace: React.FC = () => {
-    const { moveCol, findCol, groupsOrder } = useDiagramActions();
+    const { groupsOrder } = useContext(store);
     const [, drop] = useDrop({ accept: ItemTypes.COLUMN });
 
     return (
         <Wrapper>
             <DraggableSpace ref={drop}>
-                {groupsOrder.map((col: { id: string }) => renderColumn(col.id, findCol, moveCol))}
+                {groupsOrder.map((col: { id: string }) => (
+                    <DraggableColumn key={col.id} id={col.id} />
+                ))}
             </DraggableSpace>
         </Wrapper>
     );

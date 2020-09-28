@@ -1,7 +1,9 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import styled from 'styled-components';
 import Modal from 'react-modal';
 import { Colors, FontSize } from '../../../assets/const';
+import { handleTaskDelete } from '../actions/handleTaskDelete';
+import { ITaskModal } from '../models';
 
 const customStyles = {
     overlay: {
@@ -20,15 +22,11 @@ const customStyles = {
     },
 };
 
-interface ITaskModal {
-    modalOpen: boolean;
-    handleModal: () => void;
-    data: { taskName?: string; desc?: string };
-    handleTaskDelete: () => void;
-}
-
 // eslint-disable-next-line react/display-name
-const TaskModal: React.FC<ITaskModal> = memo(({ modalOpen, handleModal, data, handleTaskDelete }) => {
+const TaskModal: React.FC<ITaskModal> = memo(({ modalOpen, handleModal, data, groupID, id, group }) => {
+    const deleteTask = useCallback(() => {
+        return handleTaskDelete(id, groupID, group);
+    }, []);
     return (
         <Modal isOpen={modalOpen} onRequestClose={handleModal} style={customStyles} contentLabel="Task Modal">
             <ContentWrapper>
@@ -37,7 +35,7 @@ const TaskModal: React.FC<ITaskModal> = memo(({ modalOpen, handleModal, data, ha
                     <SubTitle>Task description:</SubTitle>
                     <Text>{data?.desc}</Text>
                 </Content>
-                <Button type="button" onClick={handleTaskDelete}>
+                <Button type="button" onClick={deleteTask}>
                     delete task
                 </Button>
             </ContentWrapper>
