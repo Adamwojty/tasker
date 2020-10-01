@@ -24,7 +24,6 @@ const customStyles = {
     },
 };
 
-// eslint-disable-next-line react/display-name
 const TaskModal: React.FC<ITaskModal> = ({ modalOpen, handleModal, data, groupID, id, group }) => {
     const { activeProject } = useContext(store);
     const deleteTask = useCallback(() => {

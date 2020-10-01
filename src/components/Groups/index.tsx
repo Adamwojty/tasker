@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import GroupsTable from './GroupsTable/GroupsTable';
+
 import AddGroup from './AddGroup';
 import Controls from './Controls';
 import AddTask from './AddTask';
+import Accordion from './Accordion';
 
 const Groups: React.FC = () => {
     const [addGroup, setAddGroup] = useState<boolean>(true);
@@ -11,7 +12,7 @@ const Groups: React.FC = () => {
         <Wrapper>
             <Controls setAddGroup={setAddGroup} addGroup={addGroup} />
             {addGroup ? <AddGroup /> : <AddTask />}
-            <GroupsTable />
+            <Accordion />
         </Wrapper>
     );
 };

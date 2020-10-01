@@ -20,6 +20,6 @@ export const moveCol = (
 
     if (!didDrop) {
         dispatch(setGroupsOrder(newColOrder));
-        return updateGroups(newColOrder, activeProjectID);
+        updateGroups(newColOrder, activeProjectID);
     }
 };

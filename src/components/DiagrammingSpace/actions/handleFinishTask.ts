@@ -4,5 +4,5 @@ import { removeTask } from './removeTask';
 
 export const handleFinishTask = (id: string, groupID: string, group: IGroup, projectID?: string) => {
     const newTaskOrder = removeTask(id, group);
-    return finishTask(id, groupID, newTaskOrder, projectID);
+    finishTask(id, groupID, newTaskOrder, projectID);
 };
