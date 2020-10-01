@@ -9,6 +9,8 @@ import DiagramingSpace from '../../components/DiagrammingSpace';
 import Project from '../../components/Project';
 import Groups from '../../components/Groups';
 import FinishedTasksView from '../../views/FinishedTasksView';
+import ProjectJoin from '../../components/JoinProject';
+import AppRouteLayoutNoProject from './AppRouteLayoutNoProject';
 
 const Routing: React.FC = () => (
     <BrowserRouter>
@@ -17,6 +19,7 @@ const Routing: React.FC = () => (
             <Route path={Routes.SIGN_IN} component={SignInView} />
             <Route path={Routes.SIGN_UP} component={SignUpView} />
 
+            <AppRouteLayoutNoProject path={Routes.JOIN_PROJECT} component={ProjectJoin} />
             <AppRouteLayout path={Routes.TABLE} component={DiagramingSpace} />
             <AppRouteLayout path={Routes.NEW_PROJECT} component={Project} />
             <AppRouteLayout path={Routes.TASKS_FINISHED} component={FinishedTasksView} />

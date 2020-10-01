@@ -20,7 +20,7 @@ const SignInView: React.FC = () => {
     return (
         <Wrapper>
             <ContentWrapper>
-                <Title>Sign In to tasker</Title>
+                <Title>Sign In to taski</Title>
                 <Formik
                     initialValues={initialValues}
                     validateOnChange={false}

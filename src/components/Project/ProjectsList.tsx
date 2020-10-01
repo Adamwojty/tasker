@@ -8,6 +8,7 @@ interface IProject {
     desc: string;
     id: string;
     groupsOrder: { id: string }[];
+    admin: string;
 }
 
 interface IProjList {
@@ -17,7 +18,7 @@ interface IProjList {
 const ProjectList: React.FC<IProjList> = ({ projects }) => {
     return (
         <Wrapper>
-            <Title>Your projects:</Title>
+            <Title>Select active project:</Title>
             {projects.length ? (
                 projects.map((item: IProject) => <ProjectItem project={item} key={item.projectName} />)
             ) : (

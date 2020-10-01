@@ -14,9 +14,10 @@ const Banner: React.FC = () => {
     }, [modalOpen]);
     return (
         <Wrapper>
-            <Logo to={Routes.TABLE}>tasker</Logo>
+            <Logo to={Routes.TABLE}>taski</Logo>
             <OptionsWrapper>
-                <NewProject to={Routes.NEW_PROJECT}>Projects</NewProject>
+                <Button to={Routes.NEW_PROJECT}>Projects</Button>
+                <Button to={Routes.JOIN_PROJECT}>Join</Button>
                 <Settings url={SettingsIcon} />
                 <Exit url={ExitIcon} onClick={handleModal} type="button" />
                 <LogoutModal modalOpen={modalOpen} handleModal={handleModal} />
@@ -44,7 +45,7 @@ const Logo = styled(Link)`
     font-weight: ${FontWeight.BOLD};
     font-size: ${FontSize.LOGO_MOBILE};
 `;
-const NewProject = styled(Link)`
+const Button = styled(Link)`
     color: ${Colors.MAIN};
     background-color: ${Colors.SECONDARY};
     padding: 5px 10px;

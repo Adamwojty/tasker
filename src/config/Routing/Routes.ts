@@ -1,6 +1,7 @@
 export enum Routes {
     MAIN = '/',
     NEW_PROJECT = '/project',
+    JOIN_PROJECT = '/project/join',
     TABLE = '/table',
     TASKS = '/tasks',
     TASKS_ADD = '/tasks/add',

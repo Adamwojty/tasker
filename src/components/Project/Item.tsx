@@ -1,23 +1,42 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import { Colors, FontSize } from '../../assets/const';
-
+import CopyIcon from '../../assets/img/icons/copy.svg';
+import { Icon } from '../common/Icon';
 interface IItem {
     handleActiveProject: () => void;
     projectName: string;
     desc: string;
     active: boolean;
+    id: string;
 }
 
-const Item: React.FC<IItem> = ({ handleActiveProject, projectName, desc, active }) => {
+const Item: React.FC<IItem> = ({ handleActiveProject, projectName, desc, active, id }) => {
+    const [success, setSuccess] = useState<boolean>(false);
+    const text = success ? 'copied' : `Copy project id to invite people: ${id}`;
+    const handleSuccess = useCallback(() => {
+        setSuccess(true);
+        setTimeout(() => {
+            setSuccess(false);
+        }, 2000);
+    }, []);
+
     return (
         <Wrapper onClick={handleActiveProject} active={active}>
             <Title>{projectName}</Title>
             <Desc>{desc}</Desc>
+            <CopyInterface>
+                <TextToCopy>{text}</TextToCopy>
+                <CopyToClipboard text={id} onCopy={handleSuccess}>
+                    <StyledIcon url={CopyIcon} />
+                </CopyToClipboard>
+            </CopyInterface>
         </Wrapper>
     );
 };
 const Wrapper = styled.div<{ active: boolean }>`
+    position: relative;
     cursor: pointer;
     display: block;
     width: 80%;
@@ -42,5 +61,24 @@ const Title = styled.h3`
 `;
 const Desc = styled.p`
     font-size: ${FontSize.TEXT_MOBILE};
+`;
+const CopyInterface = styled.div`
+    /* position: absolute;
+    top: 10px;
+    right: 10px; */
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: ${FontSize.TEXT_MOBILE};
+    display: flex;
+    align-items: center;
+`;
+const TextToCopy = styled.p`
+    border-radius: 5px;
+`;
+const StyledIcon = styled(Icon)`
+    margin-left: 5px;
+    :hover {
+        background-color: ${Colors.QUINARY};
+    }
 `;
 export default Item;

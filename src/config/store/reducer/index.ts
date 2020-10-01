@@ -9,6 +9,7 @@ export const initialState = {
     activeProject: undefined,
     groupsOrder: [],
     sidebarOpen: false,
+    admin: false,
 };
 export const reducer = (state = initialState, action: Actions | any) => {
     switch (action.type) {
@@ -26,6 +27,11 @@ export const reducer = (state = initialState, action: Actions | any) => {
             return {
                 ...state,
                 groupsOrder: action.payload,
+            };
+        case ActionTypes.SET_ADMIN:
+            return {
+                ...state,
+                admin: action.payload,
             };
 
         case ActionTypes.SET_SIDEBAR:

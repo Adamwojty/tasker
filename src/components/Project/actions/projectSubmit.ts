@@ -28,6 +28,7 @@ export const projectSubmit = async ({ values, action, user, dispatch }: IProject
             id: ID,
             projectName,
             desc,
+            admin: user?.uid,
         });
         await db
             .collection('users')

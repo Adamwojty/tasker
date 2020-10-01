@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
 import AddGroup from './AddGroup';
 import Controls from './Controls';
 import AddTask from './AddTask';

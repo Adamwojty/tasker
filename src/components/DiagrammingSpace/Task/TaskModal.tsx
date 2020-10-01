@@ -25,7 +25,7 @@ const customStyles = {
 };
 
 const TaskModal: React.FC<ITaskModal> = ({ modalOpen, handleModal, data, groupID, id, group }) => {
-    const { activeProject } = useContext(store);
+    const { activeProject, admin } = useContext(store);
     const deleteTask = useCallback(() => {
         return handleTaskDelete(id, groupID, group);
     }, []);
@@ -44,9 +44,13 @@ const TaskModal: React.FC<ITaskModal> = ({ modalOpen, handleModal, data, groupID
                     <Button type="button" onClick={markAsFinished}>
                         mark as finished
                     </Button>
-                    <Button type="button" onClick={deleteTask}>
-                        delete task
-                    </Button>
+                    {!admin ? (
+                        <Button type="button" onClick={deleteTask}>
+                            delete task
+                        </Button>
+                    ) : (
+                        <DeleteText>no permission to delete task</DeleteText>
+                    )}
                 </ButtonsWrapper>
             </ContentWrapper>
             <Close onClick={handleModal}>X</Close>
@@ -59,6 +63,14 @@ const ContentWrapper = styled.div`
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+`;
+const DeleteText = styled.p`
+    font-size: ${FontSize.TEXT_MOBILE};
+    text-align: center;
+    margin-top: 10px;
+    border: 1px solid ${Colors.QUINARY};
+    border-radius: 5px;
+    padding: 5px 5px;
 `;
 
 const Content = styled.div`

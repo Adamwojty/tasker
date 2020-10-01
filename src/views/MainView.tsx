@@ -11,7 +11,7 @@ const MainView: React.FC = () => {
             <ContentWrapper>
                 <LogoContainer>
                     <Logo url={LogoIcon} />
-                    <Title>tasker</Title>
+                    <Title>taski</Title>
                 </LogoContainer>
                 <LinkContainer>
                     <StyledLink to={Routes.SIGN_IN}>Sign In</StyledLink>

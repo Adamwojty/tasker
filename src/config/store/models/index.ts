@@ -6,6 +6,7 @@ export enum ActionTypes {
     SET_ACTIVE_PROJECT = 'SET_ACTIVE_PROJECT',
     SET_GROUPS_ORDER = 'SET_GROUPS_ORDER',
     SET_SIDEBAR = 'SET_SIDEBAR',
+    SET_ADMIN = 'SET_ADMIN',
 }
 
 //Action's interfaces
@@ -38,7 +39,7 @@ export interface IInitialContext {
     };
     groupsOrder: { id: string }[];
     sidebarOpen: boolean;
-
+    admin: boolean;
     dispatch: ({ type, payload }: { type: string; payload: any }) => void;
 }
 export interface IStateProvider {
@@ -50,4 +51,5 @@ export type Actions =
     | { type: ActionTypes.ADD_PROJECT_ID; payload: IProjectId }
     | { type: ActionTypes.SET_SIDEBAR; payload: any }
     | { type: ActionTypes.SET_ACTIVE_PROJECT; payload: IProject }
-    | { type: ActionTypes.SET_GROUPS_ORDER; payload: string[] };
+    | { type: ActionTypes.SET_GROUPS_ORDER; payload: string[] }
+    | { type: ActionTypes.SET_ADMIN; payload: boolean };

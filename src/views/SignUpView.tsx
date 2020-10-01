@@ -18,7 +18,7 @@ const SignUpView: React.FC = () => {
     return (
         <Wrapper>
             <ContentWrapper>
-                <Title>Sign Up to tasker</Title>
+                <Title>Sign Up to taski</Title>
                 <Formik
                     initialValues={initialValues}
                     validateOnChange={false}

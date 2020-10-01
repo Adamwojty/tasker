@@ -33,3 +33,9 @@ export const setSidebarOpen = (props?: any) => {
         payload: props,
     };
 };
+export const setAdmin = (isAdmin: boolean) => {
+    return {
+        type: ActionTypes.SET_ADMIN,
+        payload: isAdmin,
+    };
+};

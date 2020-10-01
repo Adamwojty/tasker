@@ -10,6 +10,7 @@ interface IAccordionContents {
 
 const AccordionContents: React.FC<IAccordionContents> = ({ isOpen, taskID }) => {
     const { data } = useTasksData(taskID);
+
     return (
         <PoseAccordionContents isOpen={isOpen}>
             {data && data ? <AccordionTask taskName={data.taskName} desc={data.desc} /> : null}

@@ -15,6 +15,7 @@ const AppRouteLayout: React.FC<IAppRouteLayout> = ({ component: Component, ...re
     const uid = localStorage.getItem('uid');
     return uid ? (
         <Route
+            exact
             {...rest}
             render={(props) => <AppLayout>{activeProject ? <Component {...props} /> : <Project />}</AppLayout>}
         />
