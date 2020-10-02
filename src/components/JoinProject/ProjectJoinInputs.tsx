@@ -11,9 +11,17 @@ enum Fields {
 interface IProjectJoinInputs {
     errors: { projectID?: string };
     values: { projectID: string };
+    projects?: string[];
 }
+const validateProject = (value: string, error: string, projects?: string[]) => {
+    console.log(projects, value);
+    if (projects?.includes(value)) {
+        error = `you're already member of this project`;
+    }
+    return error;
+};
 
-const ProjectJoinInputs: React.FC<IProjectJoinInputs> = ({ errors, values }) => {
+const ProjectJoinInputs: React.FC<IProjectJoinInputs> = ({ errors, values, projects }) => {
     return (
         <FormWrapper>
             <Field
@@ -23,6 +31,7 @@ const ProjectJoinInputs: React.FC<IProjectJoinInputs> = ({ errors, values }) => 
                 component={Input}
                 error={errors.projectID}
                 value={values.projectID}
+                validate={(value: string, error: string) => validateProject(value, error, projects)}
             />
             <SubmitButton text="join existing project" />
         </FormWrapper>

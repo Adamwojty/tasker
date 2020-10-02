@@ -12,6 +12,7 @@ interface IInitialValues {
 const ProjectJoin: React.FC = () => {
     const initialValues: IInitialValues = { projectID: '' };
     const { user } = useContext(store);
+
     return (
         <Wrapper>
             <Title>Join existing project</Title>
@@ -21,7 +22,9 @@ const ProjectJoin: React.FC = () => {
                 validateOnBlur={false}
                 onSubmit={(values, action) => joinProject(values, action, user?.uid)}
             >
-                {(props: { errors: IInitialValues; values: IInitialValues }) => <ProjectJoinInputs {...props} />}
+                {(props: { errors: IInitialValues; values: IInitialValues }) => (
+                    <ProjectJoinInputs {...props} projects={user?.projectsId} />
+                )}
             </Formik>
         </Wrapper>
     );
