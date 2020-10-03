@@ -17,7 +17,8 @@ export const useGetGroups = () => {
             groupsOrder.map((g: { id: string }) => {
                 db.collection('groups')
                     .doc(g.id)
-                    .onSnapshot((snapshot) => allGroups.push(snapshot.data()));
+                    .get()
+                    .then((response) => allGroups.push(response.data()));
             });
             setGroups(allGroups);
         };

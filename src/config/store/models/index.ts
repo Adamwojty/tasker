@@ -27,8 +27,8 @@ interface IProject {
 // Context
 export interface IInitialContext {
     user: {
-        uid: string;
-        projectsId: string[];
+        uid?: string;
+        projectsId?: string[];
     };
 
     activeProject?: {

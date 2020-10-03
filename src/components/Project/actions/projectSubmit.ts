@@ -15,8 +15,8 @@ interface IProject {
         resetForm: (nextInitialState?: FormikState<IValues>) => void;
     };
     user: {
-        uid: string;
-        projectsId: string[];
+        uid?: string;
+        projectsId?: string[];
     } | null;
     dispatch: ({ type, payload }: { type: string; payload: unknown }) => void;
 }
@@ -29,6 +29,8 @@ export const projectSubmit = async ({ values, action, user, dispatch }: IProject
             projectName,
             desc,
             admin: user?.uid,
+            groupsOrder: [],
+            finishedTasks: [],
         });
         await db
             .collection('users')

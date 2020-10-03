@@ -18,12 +18,7 @@ export const submitGroup = async ({ values, action, projectID }: IGroup) => {
     try {
         const { groupName } = values;
         const ID: string = randomID();
-        await db
-            .collection('projects')
-            .doc(projectID)
-            .collection('groups')
-            .doc(ID)
-            .set({ groupName, id: ID, taskOrder: [] });
+        await db.collection('groups').doc(ID).set({ groupName, id: ID, taskOrder: [] });
         await db
             .collection('projects')
             .doc(projectID)

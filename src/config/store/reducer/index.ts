@@ -2,10 +2,12 @@ import { ActionTypes } from '../models';
 import { Actions } from '../models';
 
 export const initialState = {
-    user: {
-        uid: 'QwtgPwzXUDds1MXhO40i4pWiWEh2',
-        projectsId: ['_b5gc2wa1s'],
-    },
+    user: {},
+    // {
+    //     uid: 'QwtgPwzXUDds1MXhO40i4pWiWEh2',
+    //     projectsId: ['_b5gc2wa1s'],
+    // }
+
     activeProject: undefined,
     groupsOrder: [],
     sidebarOpen: false,

@@ -12,6 +12,13 @@
 
 Here is a working live demo : "https://taski-app.netlify.app/"
 
+## Example account
+
+  <ul>
+    <li>email: john@doe.com</li>
+    <li>password: johndoe123</li>
+  </ul>
+
 # Built with
 
 -   [Typescript](https://www.typescriptlang.org/) - TypeScript is an open-source language which builds on JavaScript, one of the world’s most used tools, by adding static type definitions.
