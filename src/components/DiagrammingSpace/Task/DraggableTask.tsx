@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../assets/const';
-import { useTasksData } from '../../common/hooks/useTasksData';
+import { Collections } from '../../common/enums';
+import { useFetchSingleItem } from '../../common/hooks/useFetchSingleItem';
 import { useDragTask } from '../hooks/useDragTask';
 import { useModal } from '../hooks/useModal';
 import { IDragTask } from '../models';
@@ -10,7 +11,7 @@ import TaskModal from './TaskModal';
 
 const DraggableTask: React.FC<IDragTask> = ({ id, colID, groupID, group }) => {
     const { drop, drag } = useDragTask(colID, id, groupID, group);
-    const { data } = useTasksData(id);
+    const { data } = useFetchSingleItem(id, Collections.TASKS);
     const { modalOpen, handleModal } = useModal();
     return (
         <>

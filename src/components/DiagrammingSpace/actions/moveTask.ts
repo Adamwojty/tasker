@@ -14,5 +14,5 @@ export const moveTask = (
             [atIndex, 0, item],
         ],
     });
-    updateTasks(newTaskOrder, id);
+    updateTasks(newTaskOrder, group.id);
 };

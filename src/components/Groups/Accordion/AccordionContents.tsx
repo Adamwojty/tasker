@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import { useTasksData } from '../../common/hooks/useTasksData';
+import { Collections } from '../../common/enums';
+import { useFetchSingleItem } from '../../common/hooks/useFetchSingleItem';
 import AccordionTask from './AccordionTask';
+
 interface IAccordionContents {
     isOpen: boolean;
     taskID: string;
 }
 
 const AccordionContents: React.FC<IAccordionContents> = ({ isOpen, taskID }) => {
-    const { data } = useTasksData(taskID);
-
+    const { data } = useFetchSingleItem(taskID, Collections.TASKS);
     return (
         <PoseAccordionContents isOpen={isOpen}>
             {data && data ? <AccordionTask taskName={data.taskName} desc={data.desc} /> : null}

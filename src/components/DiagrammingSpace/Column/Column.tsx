@@ -5,18 +5,19 @@ import { ICol } from '../models';
 import { useTaskDrop } from '../hooks/useDropTask';
 import Spinner from '../../common/Spinner';
 import DraggableTask from '../Task/DraggableTask';
-import { useGroupData } from '../../common/hooks/useGroupData';
+import { Collections } from '../../common/enums';
+import { useFetchSingleItem } from '../../common/hooks/useFetchSingleItem';
 
 const Column: React.FC<ICol> = ({ isDragging, colID, groupID }) => {
-    const { group } = useGroupData(groupID);
+    const { data } = useFetchSingleItem(groupID, Collections.GROUPS);
     const { drop } = useTaskDrop(colID, groupID);
     return (
         <>
-            <Title isDragging={isDragging}>{group?.groupName}</Title>
+            <Title isDragging={isDragging}>{data?.groupName}</Title>
             <Col ref={drop}>
-                {group ? (
-                    group.taskOrder.map((task: { id: string }) => (
-                        <DraggableTask key={task.id} id={task.id} colID={colID} groupID={groupID} group={group} />
+                {data ? (
+                    data.taskOrder.map((task: { id: string }) => (
+                        <DraggableTask key={task.id} id={task.id} colID={colID} groupID={groupID} group={data} />
                     ))
                 ) : (
                     <Spinner />

@@ -23,9 +23,9 @@ export const useGetGroups = () => {
             setGroups(allGroups);
         };
         unsubscribe();
-        return () => {
-            unsubscribe();
-        };
+        // return () => {
+        //     unsubscribe();
+        // };
     }, []);
     return { groups };
 };

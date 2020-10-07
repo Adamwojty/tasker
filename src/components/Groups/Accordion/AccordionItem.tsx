@@ -2,11 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { useAccordion } from '../hooks/useAccordion';
 import ToggleIcon from '../../../assets/img/icons/toggle.svg';
-
-import { useGroupData } from '../../common/hooks/useGroupData';
 import Spinner from '../../common/Spinner';
 import AccordionContents from './AccordionContents';
 import { Colors, FontSize, FontWeight } from '../../../assets/const';
+import { useFetchSingleItem } from '../../common/hooks/useFetchSingleItem';
+import { Collections } from '../../common/enums';
+
 interface IAccordionItem {
     index: number;
     groupID: string;
@@ -14,15 +15,15 @@ interface IAccordionItem {
 
 const AccordionItem: React.FC<IAccordionItem> = ({ index, groupID }) => {
     const { openIndexes, toggleIndex } = useAccordion();
-    const { group } = useGroupData(groupID);
+    const { data } = useFetchSingleItem(groupID, Collections.GROUPS);
     const isOpen = openIndexes.includes(index);
     return (
         <Wrapper>
             <AccordionButton isOpen={isOpen} onClick={() => toggleIndex(index)}>
-                {group?.groupName} <Icon isOpen={isOpen} url={ToggleIcon} />
+                {data?.groupName} <Icon isOpen={isOpen} url={ToggleIcon} />
             </AccordionButton>
-            {group ? (
-                group.taskOrder.map((task: { id: string }) => (
+            {data ? (
+                data.taskOrder.map((task: { id: string }) => (
                     <AccordionContents key={task.id} taskID={task.id} isOpen={isOpen} />
                 ))
             ) : (
