@@ -1,7 +1,8 @@
 import update from 'immutability-helper';
 import { setGroupsOrder } from '../../../config/store/actions';
+import { Collections } from '../../common/enums';
 import { findCol } from './findCol';
-import { updateGroups } from './updateGroups';
+import { updateDoc } from './updateDoc';
 export const moveCol = (
     id: string,
     atIndex: number,
@@ -20,6 +21,6 @@ export const moveCol = (
 
     if (!didDrop) {
         dispatch(setGroupsOrder(newColOrder));
-        updateGroups(newColOrder, activeProjectID);
+        updateDoc(newColOrder, Collections.PROJECTS, 'groupsOrder', activeProjectID);
     }
 };

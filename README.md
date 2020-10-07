@@ -32,7 +32,7 @@ Here is a working live demo : "https://taski-app.netlify.app/"
 -   [Eslint](https://eslint.org/) - Find and fix problems in your JavaScript code.
 -   [Prettier](https://prettier.io/) - An opinionated code formatter.
 
-# FEATURES
+# Features
 
 <ol>
     <li>Create new accout or sign in with existing one</li>

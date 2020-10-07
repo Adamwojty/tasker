@@ -1,6 +1,8 @@
 import update from 'immutability-helper';
+import { Collections } from '../../common/enums';
 import { FindTaskType } from '../models';
-import { updateTasks } from './updateTasks';
+import { updateDoc } from './updateDoc';
+
 export const moveTask = (
     id: string,
     atIndex: number,
@@ -14,5 +16,6 @@ export const moveTask = (
             [atIndex, 0, item],
         ],
     });
-    updateTasks(newTaskOrder, group.id);
+
+    updateDoc(newTaskOrder, Collections.GROUPS, 'taskOrder', group.id);
 };
